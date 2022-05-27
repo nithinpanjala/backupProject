@@ -1,14 +1,21 @@
 package com.foodmunch.Entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "customer")
@@ -47,6 +54,9 @@ public class Customer {
 	@Column(name = "customerEmail", nullable = false)
 	private String customerEmail;
 
+	@JsonManagedReference(value = "customerAddress")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Set<CustomerAddress> customerAddresses;
 	
 	public Customer() {
 		super();

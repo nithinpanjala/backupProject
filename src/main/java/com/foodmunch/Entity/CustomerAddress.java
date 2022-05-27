@@ -5,8 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "customerAddress")
@@ -40,6 +45,11 @@ public class CustomerAddress {
 	
 	@Column(name = "custstate", nullable = false)
 	private String custState;
+	
+	@ManyToOne
+	@JoinColumn(name = "customerId",referencedColumnName = "customerId" )
+	@JsonBackReference(value = "customerAddress")
+	private Customer customer;
 	
 	   @OneToOne(mappedBy = "deliveryAddress")
 		private Cart cart;

@@ -96,6 +96,27 @@ public class FoodMenu {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
+	public FoodMenu(int foodId, String foodName, float foodPrice, int foodQuantityAvailable, FoodType isVegeterian,
+			Restaurant restaurant) {
+		super();
+		this.foodId = foodId;
+		this.foodName = foodName;
+		this.foodPrice = foodPrice;
+		this.foodQuantityAvailable = foodQuantityAvailable;
+		this.isVegeterian = isVegeterian;
+		this.restaurant = restaurant;
+	}
+
+	public FoodMenu(String foodName, float foodPrice, int foodQuantityAvailable, FoodType isVegeterian,
+			Restaurant restaurant) {
+		super();
+		this.foodName = foodName;
+		this.foodPrice = foodPrice;
+		this.foodQuantityAvailable = foodQuantityAvailable;
+		this.isVegeterian = isVegeterian;
+		this.restaurant = restaurant;
+	}
 	
 	
 }

@@ -1,14 +1,27 @@
 package com.foodmunch.Services;
 
 import java.util.List;
+import java.util.Set;
 
-import com.stg.entity.CreditCard;
+import com.foodmunch.Entity.FoodMenu;
+import com.foodmunch.Entity.FoodMenu.FoodType;
+import com.foodmunch.Entity.Restaurant;
 
 public interface FoodMenuService {
-    public CreditCard findByCardHolder(long customerId);
-	public void save(CreditCard foodMenu);
-	public CreditCard update(CreditCard foodMenu);
-	public List<CreditCard> findAll();
-	public CreditCard findOne(Long id);
-	public List<CreditCard >findAllMenuByResturantID(Long resturantId);
+	public Set<FoodMenu> addDishes(FoodMenu dish);
+
+	public FoodMenu UpdateDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
+			FoodType vegeterianType, Restaurant restaurant);
+
+	public FoodMenu createDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
+			FoodType vegeterianType, Restaurant restaurant);
+
+	public FoodMenu deleteDish(int dishId);
+
+	public FoodMenu updateDishQuantity(int quantity, int dishId);
+
+	public FoodMenu readDish(int DishId);
+
+	public List<FoodMenu> readAllDishes();
+
 }

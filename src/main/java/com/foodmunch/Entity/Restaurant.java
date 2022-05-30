@@ -88,6 +88,24 @@ public class Restaurant {
 	public void setRestaurantAdmin(Set<RestaurantAdmin> restaurantAdmin) {
 		this.restaurantAdmin = restaurantAdmin;
 	}
+
+	public Restaurant(int restaurantId, @NotEmpty(message = "Please provide a restaurant Name") String restaurantName,
+			RestaurantAddress restaurantAddress, Set<FoodMenu> foodMenu, Set<RestaurantAdmin> restaurantAdmin) {
+		super();
+		this.restaurantId = restaurantId;
+		this.restaurantName = restaurantName;
+		this.restaurantAddress = restaurantAddress;
+		this.foodMenu = foodMenu;
+		this.restaurantAdmin = restaurantAdmin;
+	}
+
+	public Restaurant(int restaurantId, @NotEmpty(message = "Please provide a restaurant Name") String restaurantName,
+			RestaurantAddress restaurantAddress) {
+		super();
+		this.restaurantId = restaurantId;
+		this.restaurantName = restaurantName;
+		this.restaurantAddress = restaurantAddress;
+	}
 	
 	
 }

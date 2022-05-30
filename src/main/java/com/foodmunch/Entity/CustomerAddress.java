@@ -54,6 +54,51 @@ public class CustomerAddress {
 	   @OneToOne(mappedBy = "deliveryAddress")
 		private Cart cart;
 
+	public CustomerAddress(int custAddressId, String custHouseNumber, String custAddressLane1, String custAddressLane2,
+			String custLandmark, int custPincode, String custDistrict, String custState, Customer customer) {
+		super();
+		this.custAddressId = custAddressId;
+		this.custHouseNumber = custHouseNumber;
+		this.custAddressLane1 = custAddressLane1;
+		this.custAddressLane2 = custAddressLane2;
+		this.custLandmark = custLandmark;
+		this.custPincode = custPincode;
+		this.custDistrict = custDistrict;
+		this.custState = custState;
+		this.customer = customer;
+	}
+
+	public CustomerAddress(int custAddressId, String custHouseNumber, String custAddressLane1, String custAddressLane2,
+			String custLandmark, int custPincode, String custDistrict, String custState, Customer customer, Cart cart) {
+		super();
+		this.custAddressId = custAddressId;
+		this.custHouseNumber = custHouseNumber;
+		this.custAddressLane1 = custAddressLane1;
+		this.custAddressLane2 = custAddressLane2;
+		this.custLandmark = custLandmark;
+		this.custPincode = custPincode;
+		this.custDistrict = custDistrict;
+		this.custState = custState;
+		this.customer = customer;
+		this.cart = cart;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
 	public CustomerAddress() {
 		super();
 		// TODO Auto-generated constructor stub

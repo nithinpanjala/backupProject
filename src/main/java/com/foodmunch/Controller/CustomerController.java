@@ -5,12 +5,16 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodmunch.Entity.Customer;
@@ -32,44 +36,94 @@ public class CustomerController {
 	CustomerAddressService addressService;
 
 	@Autowired
-	FoodMenuService creditService;
+	CustomerAddressService customerAddressService;
 
-//	@PostMapping("/signup")
-//	public void save(@Valid @RequestBody Customer customer) {
-//		customerService.save(customer);
-//	}
 
-	@PostMapping("/signup")
-	public void memberRegistration(@Valid @RequestBody CustomerDTO customerData) {
-		CustomerAddress addressObject = customerData.getAddress();
-		//addressService.save(addressObject);
+	/*
+	 * *************************************************************************
+	 *  create operations
+	 * ***********************************************************************
+	 */
+	
+	@PostMapping(value = "/createUser/{user}")
+	public ResponseEntity<Customer> createUser(@Valid @RequestBody Customer user) {
 
-		Customer customerObject = customerData.getCustomer();
-		customerObject.setAddress(addressObject);
-		//customerService.save(customerData.getCustomer());
+		return new ResponseEntity<Customer>(customerService.userSignUp(user), HttpStatus.ACCEPTED);
 
-		CreditCard creditCardObject = customerData.getCreditCard();
-		creditCardObject.setCardHolder(customerObject);
-		creditService.save(creditCardObject);
-	}
-	@GetMapping(value = "/check-card/{customerId}")
-    public CreditCard findCreditCard(@PathVariable long customerId) {
-        return creditService.findByCardHolder(customerId);
-    }
-
-	@PutMapping
-	public Customer update(@RequestBody Customer customer) {
-		return customerService.update(customer);
 	}
 
-	@GetMapping
-	public List<Customer> findAll() {
-		return customerService.findAll();
+	/*
+	 * *************************************************************************
+	 * read operations
+	 * ***********************************************************************
+	 */
+
+	@GetMapping(value = "/getUser/{userId}/{userPassword}")
+	public ResponseEntity<Customer> readUser(@Valid @PathVariable("userId") long userId,
+			@PathVariable("userPassword") String userPassword) {
+		return new ResponseEntity<Customer>(customerService.readUser(userId, userPassword), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/readUserByUserNameAndPassword/{userName}/{userPassword}")
+	public ResponseEntity<Customer> readUserByUserNameAndPassword(@Valid @PathVariable("userName") String userName,
+			@Valid @PathVariable("userPassword") String userPassword) {
+		return new ResponseEntity<Customer>(customerService.readUserByUserNameAndPassword(userName, userPassword), HttpStatus.OK);
+
 	}
 
-	@GetMapping("/{id}")
-	public Customer findOne(@PathVariable Long id) {
-		return customerService.findOne(id);
+	/*
+	 * *************************************************************************
+	 * delete operations
+	 * ***********************************************************************
+	 */
+
+	
+
+	@DeleteMapping(value = "/deleteUser/{userId}/{userPassword}")
+	public ResponseEntity<String> deleteByUserIdAndUserPassword(@Valid @PathVariable("userId") long userId,@Valid @PathVariable("userPassword") String userPassword) {
+		return new ResponseEntity<String>(customerService.deleteByUserIdAndUserPassword(userId, userPassword), HttpStatus.OK);
 	}
 
+	@DeleteMapping(value = "/deleteByUserNameAndUserPassword/{userName}/{userPassword}")
+	public ResponseEntity<String> deleteByUserName(@Valid @PathVariable("userName") String userName,
+			@Valid @PathVariable("userPassword") String userPassword) {
+		return new ResponseEntity<String> ( customerService.deleteByUserNameAndUserPassword(userName, userPassword), HttpStatus.OK);
+	}
+
+
+
+	/*
+	 * *************************************************************************
+	 * update operations
+	 * ***********************************************************************
+	 */
+
+
+	@PutMapping(value = "/updateUser/{user}")
+	public  ResponseEntity<Customer> updateUser(@Valid @RequestBody Customer user) {
+		return new ResponseEntity<Customer>(customerService.updateUser(user), HttpStatus.ACCEPTED);
+
+	}
+	
+	@PutMapping(value = "/updateUserPassword")
+	public ResponseEntity<Customer> updateUserPassword(@Valid @RequestParam long userId,@Valid  @RequestParam String userPassword,
+			@Valid @RequestParam String newUserPassword) {
+		return new ResponseEntity<Customer>(customerService.updateUserPassword(userId, userPassword, newUserPassword), HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping(value = "/updateUsermobile")
+	public ResponseEntity<Customer> updateUsermobile(@Valid @RequestParam String userName,@Valid  @RequestParam String userPassword,
+			@Valid @RequestParam String newUsermobile) {
+		return new ResponseEntity<Customer>(customerService.updateUsermobile(userName, userPassword, newUsermobile), HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping(value = "/updateUserEmail")
+	public ResponseEntity<Customer> updateUserEmail(@Valid @RequestParam String userName,@Valid  @RequestParam String userPassword,
+			@Valid @RequestParam String newUserEmail) {
+		return new ResponseEntity<Customer>(customerService.updateUserEmail(userName, userPassword, newUserEmail), HttpStatus.ACCEPTED);
+	}
+	
+	
+
+	
 }

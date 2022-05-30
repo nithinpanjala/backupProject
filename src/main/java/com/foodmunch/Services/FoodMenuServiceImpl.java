@@ -1,9 +1,18 @@
 package com.foodmunch.Services;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.foodmunch.Entity.FoodMenu;
+import com.foodmunch.Entity.FoodMenu.FoodType;
+import com.foodmunch.Entity.Restaurant;
+import com.foodmunch.Repository.FoodMenuRepository;
+import com.foodmunch.Exceptions.CustomException;
 
 
 @Service
@@ -11,32 +20,88 @@ import org.springframework.stereotype.Service;
 public class FoodMenuServiceImpl implements FoodMenuService{
 	
 	@Autowired
-    private FoodMenuService   foodMenuDao;
+	FoodMenuRepository dishRepository;
 
-    public void save( CreditCard foodMenu) {  		
-    	foodMenuDao.save(foodMenu);
-	}
-    public CreditCard findByCardHolder(long customerId) {
-        return foodMenuDao.findByCardHolder(customerId);
-    }
-    
-    public CreditCard update( CreditCard  foodMenu) {  		
-		return foodMenuDao.update(foodMenu);
-	}
-	
-  	
-	public List<CreditCard> findAll() {
-		return (List<CreditCard>)foodMenuDao.findAll();
+	@Override
+	public Set<FoodMenu> addDishes(FoodMenu dish) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public FoodMenu UpdateDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
+			FoodType vegeterianType, Restaurant restaurant) throws CustomException {
+
+		if (dishRepository.existsById(dishId)) {
+			FoodMenu dish1 = new FoodMenu(dishId, dishName, dishPrice, dishQuantityAvailable, vegeterianType, restaurant);
+			return dishRepository.save(dish1);
 	
-	public CreditCard findOne(Long id) {
-		return foodMenuDao.findOne(id);
+		} else {
+			throw new CustomException("no dish found");
+		}
 	}
-	public List<CreditCard>findAllMenuByResturantID(Long resturantId) {
-		return foodMenuDao.findAllMenuByResturantID(resturantId);
-	}
+
+	@Override
+	public FoodMenu createDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
+			FoodType vegeterianType, Restaurant restaurant)  throws CustomException {
+		if (dishRepository.existsById(dishId)) {
+			throw new CustomException("dish already exists ");
 	
+		} else {
+			FoodMenu dish = new FoodMenu(dishId, dishName, dishPrice, dishQuantityAvailable, vegeterianType, restaurant);
+			return dishRepository.save(dish);
+		}
+		
+
+	}
+
+	@Override
+	public FoodMenu deleteDish(int dishId)  throws CustomException {
+		
+		if (dishRepository.existsById(dishId)) {
+			FoodMenu dish = dishRepository.getById(dishId);
+			dishRepository.delete(dish);
+			return dish;
+	
+		} else {
+			throw new CustomException("dish does not exists ");
+		}
+	}
+
+	@Override
+	public FoodMenu updateDishQuantity(int quantity, int dishId)  throws CustomException {
+		
+		if (dishRepository.existsById(dishId)) {
+			FoodMenu dish = dishRepository.getById(dishId);
+			dish.setFoodQuantityAvailable(quantity);
+			dishRepository.save(dish);
+			return dish;
+	
+		} else {
+			throw new CustomException("dish does not exists ");
+		}
+
+	}
+
+	@Override
+	public FoodMenu readDish(int dishId)  throws CustomException{
+		
+		if (dishRepository.existsById(dishId)) {
+			return dishRepository.getById(dishId);
+	
+		} else {
+			throw new CustomException("dish does not exists ");
+	}
+	}
+
+	@Override
+	public List<FoodMenu> readAllDishes() throws CustomException {
+		if(dishRepository.findAll() == null) {
+			throw new CustomException(" no dishes avaiable ");
+		}else {
+			return dishRepository.findAll();
+		}
+	}
 	
 
 }

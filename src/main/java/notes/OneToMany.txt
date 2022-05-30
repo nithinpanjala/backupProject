@@ -1,0 +1,53 @@
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+Step 1 :
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+@Entity
+@Table(name = "dept_tbl")
+public class Department {
+
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private int deptId;
+	@Column (name = "departmentname", length = 20)
+	private String deptName;
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "department")
+	private List<Employee> employees; // one to many
+
+
+Step 2 : 
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int empId;
+	@Column(name = "employeename",length = 25)
+	private String empName;
+	private float salary;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dept_id", nullable = false)
+	@JsonBackReference
+	private Department department; // Bi direction

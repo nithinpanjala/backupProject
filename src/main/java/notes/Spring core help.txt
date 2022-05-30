@@ -1,0 +1,118 @@
+Spring application
+Pre 
+  JDK 1.8
+  Maven 3.8
+  IDE - Eclipse / STS 
+  
+
+Step 1: Create a maven project 
+	group id     : com
+	artifact id  : <project_name>
+	packaging    : jar 
+Step 2 : pom.XML 
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring.version>5.3.18</spring.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring ORM -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+
+	</dependencies>
+
+</project>
+
+Step 3 : 
+	cmd > mvn clean install 	(for first time - .m2 (local repo))
+
+Step 4 :  create the necessary packages 
+
+		com.model
+		com.service
+		com.main
+		com.config 
+
+Step 5 : Create a POJO 
+
+import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Service;
+
+@Component (value = "aliasname")   // another name to refer
+//@Service
+//@Repository
+public class Address extends Object {
+
+	private int doorNo;
+	private String city;
+	private String state;
+
+	public Address() {
+		super();
+		System.out.println("Address constructor");
+	}
+	
+	// generate getter and setter method()
+
+Step 6: Create the configuration 
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import com.model.Address;
+
+@Configuration					// replacement of XML 
+@ComponentScan (basePackages = "com.model")  	// where can Spring find the spring 						// @components 
+public class MyConfiguration {
+
+	
+}
+
+Step 7: Load the Config 
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.model.Address;
+import com.model.Employee;
+
+public class MainApp {
+
+	public static void main(String[] args) {
+		ApplicationContext applicationContext = new 					AnnotationConfigApplicationContext(
+						com.config.MyConfiguration.class);
+
+		Address address = (Address) applicationContext.getBean("aliasname");
+		System.out.println("Door no :" + address.getDoorNo());
+		System.out.println("City    :" + address.getCity());
+		System.out.println("State   :" + address.getState());
+
+		System.out.println("The End");
+
+	}
+
+}
+

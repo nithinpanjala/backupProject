@@ -1,0 +1,268 @@
+Webservice 
+  1) JAX WS  XML/SOAP web service  (WSDL) 
+  2) JAX RS RESTful service 
+
+
+HTTP method 
+
+GET Method. A GET request retrieves data from a web server by specifying parameters in the URL portion of the request. ...
+HEAD Method. ...
+POST Method. ...
+PUT Method. ...
+DELETE Method. ...
+CONNECT Method. ...
+OPTIONS Method. ...
+TRACE Method.
+
+
+CRUD () - operation / functions 
+
+create() - POST 
+read()   - GET
+update() - PUT
+delete() - DELETE 
+
+Jersey framework  --> Develop --> RESTFulservice  
+Spring framework  --> Develop --> RESTFulservice 
+
+S/w pre 
+ 1) JDK 1.8 
+ 2) Build tool  --> Maven  / Gradle
+ 3) Web server  --> Tomcat 9.X
+ 4) API -> *.jar   REST container  -- Spring --> ApplicationContext '
+ 5) IDE 
+	Eclipse / STS 
+
+
+Demo Create a Hr Application 
+
+Step 1 : 
+	a) Open eclipse --> JEE perspective 
+	b) Open eclipse --> menu --> file --> new --> Maven Project 
+	c) (select)  Create a simple project 
+	d) 
+		group id    : <package_name>  ex : com.stg
+		artifact Id : <project_name>  ex : hrappl
+		packaging   : war			 (web app) 
+	
+
+Step 2 : create a folder "WEB-INF"   under src\main\webapp 	(should be in CAPS)
+
+Step 3 : create/copy "web.xml" DD Deployement Descriptor    
+		( front controller (design pattern)  -- DispatcherServlet) 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+
+	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+	</context-param>
+
+</web-app>
+
+
+Step 4: create a configuration file based on the name mentioned in web.xml 
+		src\main\webapp\WEB-INF\<springrestconfig>-servlet.xml 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.controller" />
+
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter"	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</bean>
+
+	<bean id="xmlMessageConverter"
+		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
+	</bean>
+	<bean	class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+				<ref bean="xmlMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+
+</beans>
+
+Step 5 : configure the dependencies in pom.xml 
+
+<properties>
+		<spring.version>5.3.19</spring.version>
+		<jackson.databind-version>2.9.0</jackson.databind-version>
+		<org.slf4j-version>1.7.5</org.slf4j-version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<!-- Spring dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Jackson -->
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.databind-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
+Step 6 :  
+	cmd >  mvn clean install 
+	Right click on the project --> maven --> update --> maven project 
+
+
+Step 7 : Create the required package 	src\main\java 
+
+		com.controller
+		com.model
+		com.service
+		com.dao 
+		com.exception 
+
+
+Step 8 : create the POJO /Model /Bean 
+
+
+public class Employee {
+	private int empId;
+	private String empName;
+	private char gender;
+	private float salary;
+
+	// default == non parameter constructor
+	// Create parameter constructor
+	// generate getter and setter
+
+Step 9 : create another POJO/Model/Bean 
+
+public class Department {
+
+	private int deptId;
+	private String depName;
+	private String location;
+	private List<Employee> employees; // type safty
+	// Has a relation == Aggregation ==> [ ] / collection
+
+	// default constructor
+	// parameter constructor
+	// generate getter and setter
+
+Step 10: Create RestController 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.model.Department;
+import com.model.Employee;
+
+@RestController
+public class HrController {
+
+	// function / method / procedure == Business logic
+	// RequestHandler --> URI
+	@RequestMapping(value = "/getdeparment", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public Department getDepartment() {
+		// hardcoding
+		// -- service -- DAO -- DB
+		Employee employee1 = new Employee(10, "Apple", 'M', 1500);
+		Employee employee2 = new Employee(20, "Mango", 'M', 2500);
+		Employee employee3 = new Employee(30, "Zeebra", 'F', 1100);
+		Employee employee4 = new Employee(40, "Elephant", 'F', 3000);
+
+		Department department1 = new Department();
+		department1.setDeptId(123);
+		department1.setDepName("Development");
+		department1.setLocation("Chennai");
+
+		List<Employee> employees = new ArrayList<Employee>();
+		employees.add(employee1);
+		employees.add(employee2);
+		employees.add(employee3);
+		employees.add(employee4);
+
+		department1.setEmployees(employees);
+		return department1;
+
+	}
+}
+

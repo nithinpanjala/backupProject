@@ -1,0 +1,154 @@
+Pre 
+ Node 		cmd > node -v
+ NPM		cmd > npm -v
+ Angular CLI    cmd > ng --version
+
+IDE 
+  Visual studio
+
+
+cmd  > ng new <AppName>
+	Routing  : Y
+	Styling  : css 
+
+Step 3 : Integrate JQuery and Bootstrap with Angular
+	
+Cmd > npm install bootstrap jquery  --save
+
+Step 4 : Configure installed Bootstrap & JQuery in an angular.json file:
+
+"styles": [
+  "src/styles.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
+"scripts": [
+  "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+]
+
+Step 5 :  create model Employee 
+		cmd > ng g class <className> 
+	export class Employee {
+    		id: number = 0;
+    		firstName: string = ' ';
+    		lastName: string = "";
+    		emailId: string = " ";
+    		active: boolean = false;
+}
+
+Step 6 : src\app\app.module.ts
+import { HttpClientModule } from '@angular/common/http';    //3
+@NgModule({
+  declarations: [
+    AppComponent,
+    CreateEmployeeComponent,
+    EmployeeDetailsComponent,
+    EmployeeListComponent,
+    UpdateEmployeeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,            //1
+    HttpClientModule        //2
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+Step 7 : create a service  (connect to external Spring boot ) 
+
+	cmd > ng g service <serviceName> 
+		
+
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeSerService {
+
+  private baseUrl = 'http://localhost:9090/springboot-crud-rest/api/employees';
+  constructor(private http: HttpClient) { }
+
+  getEmployee(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
+
+  createEmployee(employee: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, employee);
+  }
+
+  updateEmployee(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, value);
+  }
+
+  deleteEmployee(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  }
+
+  getEmployeesList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
+  }
+}
+
+
+Step 8 : create the component 
+
+	1) CreateEmployee
+	2) ListEmployee
+  	3) updateEmployee
+	4) deleteEmployee
+
+
+	cmd > ng generare component <component_name>
+		  or
+	cmd >  ng g c <component_name>		( 4 file 
+
+Step 8 : CreateEmployeeComponent.ts
+
+		@Component({
+  selector: 'app-create-employee',
+  templateUrl: './create-employee.component.html',
+  styleUrls: ['./create-employee.component.css']
+})
+export class CreateEmployeeComponent implements OnInit {
+
+  employee: Employee = new Employee();
+  submitted = false;
+
+  constructor(private employeeService: EmployeeSerService,
+    private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  newEmployee(): void {
+    this.submitted = false;
+    this.employee = new Employee();
+  }
+
+  save() {
+    this.employeeService
+      .createEmployee(this.employee).subscribe((data: any) => {
+        console.log(data)
+        this.employee = new Employee();
+        this.gotoList();
+      },
+        (error: any) => console.log(error));
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.save();
+  }
+
+  gotoList() {
+    this.router.navigate(['/employees']);
+  }
+
+}
+
+
+Step 9 : CreateEmployee.html 

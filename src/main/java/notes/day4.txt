@@ -1,0 +1,84 @@
+Day 4 
+
+Multiple java files  (layered approach )  == module == Loose coupling  == modify/update (dont not impact other .java file) 
+
+EmployeeVo
+EmployeeTO
+Employee  (best choise) 
+
+
+data type ( 8)
+
+derivered 
+   Array  (collection of similar data type)
+	1) <data_type>[ ]>  variableName = { data1,data2,dat3 ....}
+	2) <data_type>[ ]>  variableName = new data_type>[ ];
+
+Ex 1
+
+	int[ ] intVar = { 11,33,55,66};
+
+	String strVar = { "aa" , "bb","cc"}
+
+
+Ex 2:
+	int[ ] intVar = new int[size] (size is mandatory) 
+	
+	int[ ] intArray = new int[4];
+
+	index
+	 intArray[0] = value 
+	 SOP(intArray[index]);
+
+
+Drawback of array 
+
+ size is fixed 
+
+Rules for defining a package 
+
+1) package <packagename> ; first line of code 
+2) package and folder name should be same 
+3) all charaters in package name should be in small case 
+4) Package is mandatory 
+
+
+function name is same but different parameter/ argument  = Polymorphism 
+
+	multiple form 
+	add( ) { }
+	add (int a)
+	add( int a, int b)
+	add (int a , int b , int c) 
+
+Polymorphism 
+
+There are 2 ypes of polymorphism 
+	1) static 
+		method overload 
+	2) dynamic == runtime polymorphism ( inheritance ) 
+		method override 
+
+in class if we have more than one function with the same name but different argument/parameter 
+
+What about return type ?? 
+return type does not matter 
+
+class Parent{
+
+
+	entertainment(){  TV	}
+
+
+}
+
+class Child extends Parent 	// entends inheritance 
+{
+	entertainment(){ mobile	} // override 
+
+
+Assignment 
+
+1) Among the 3 employees let us know who is drawing the higgest salary 
+
+2) give an hike of 500 Rs to every employee  (return array of employee 

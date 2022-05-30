@@ -1,0 +1,43 @@
+Feign REST Client
+- OpenFeign which is a declarative REST client.
+- Originally Netflix developed Feign, but as they stopped supporting the     library, it is now a community-driven project and is called OpenFeign.
+- It makes writing web service clients easier. 
+- To use Feign create an interface and annotate it. 
+- It has pluggable annotation support including Feign annotations and    JAX-RS annotations. 
+- Feign also supports pluggable encoders and decoders
+- Spring Cloud integrates Ribbon and Eureka to provide a load balanced   http client when using Feign.
+
+Demo 
+
+Dependency : OpenFeign (search)  -  spring-cloud-starter-openfeign
+
+
+
+Step 1 : 
+ 	spring-cloud-starter-openfeign
+
+
+Step 2 : 
+
+@SpringBootApplication
+@EnableFeignClients
+public class ApplicationProducer {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+
+Step 3 :
+
+@FeignClient("stores")
+public interface StoreClient {
+    @RequestMapping(method = RequestMethod.GET, value = "/stores")
+    List<Store> getStores();
+
+    @RequestMapping(method = RequestMethod.POST, value = "/stores/{storeId}", consumes = "application/json")
+    Store update(@PathVariable("storeId") Long storeId, Store store);
+}
+
+

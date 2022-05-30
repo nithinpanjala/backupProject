@@ -1,0 +1,79 @@
+Spring annotation 
+-----------------
+Step 1 : pom.xml 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring.version>5.3.15</spring.version>
+	</properties>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring ORM -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	</dependencies>
+</project>
+
+
+Notes
+Get rid of Setters and Getters
+
+What is Lombok?
+ - Lombok is a open source library (basically a standalone jar) which is capable of doing magic in 
+   automating the boilerplate code generation for any java class
+ - Create a maven project in eclipse and add lombok dependency in pom.xml
+	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+- Do a mvn clean install command
+- Once the jar downloaded in Local repository, goto the jar location from command prompt 
+  and run the following command java -jar lombok-1.16.18.jar and we should be greeted by Lombok installation window
+  
+Step 1 : C:\Users\jason.d\.m2\repository\org\projectlombok\lombok\1.18.8
+Step 2 : cmd > cd C:\Users\jason.d\.m2\repository\org\projectlombok\lombok\1.18.8      folder
+Step 3 : cmd > java -jar lombok-1.18.8.jar
+Step 4 : Browse the eclipse software folder (eclipse.exe)  and install
+Step 5 : Restart eclipse 
+
+XML and annotation 
+-------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <context:component-scan base-package="com" />
+</beans>

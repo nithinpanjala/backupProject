@@ -1,0 +1,41 @@
+Log4j
+Step 1 : pom.xml 
+	<dependency>
+	  <groupId>log4j</groupId>
+	  <artifactId>log4j</artifactId>
+	  <version>1.2.17</version>
+	</dependency>
+Step 2 :  create a file "log4j.properties" in src/main/resources
+
+log4j.rootLogger=DEBUG, stdout, file
+
+# Redirect log messages to console
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+# Redirect log messages to a log file, support file rolling.
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=D:\\mylog\\log4j-application.log
+log4j.appender.file.MaxFileSize=5MB
+log4j.appender.file.MaxBackupIndex=10
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+
+Step 3 :  any Java file abcove the method 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+public class <ClassName> {
+private static final Logger LOGGER = LogManager.getLogger(<currentClassName.class);
+
+public void function()
+{
+		logger.debug("meaning logging = comment ");
+		logger.info("Info");
+		logger.warn("warning!");
+		logger.error("error");
+		System.out.println("Logging demo");
+}
+}

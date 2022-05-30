@@ -1,0 +1,90 @@
+Day 3 
+
+Class 
+Object 
+Encapsulation 
+
+
+Any code in java has to be inside a class (OOP)
+
+class can have state alone 
+class can have behaviour alone 
+class would have state + behaviour  = Encapsulation 
+
+
+Multiple classes 
+
+   modules -- small small code  (loose coupling)  = Layered approach 
+
+
+
+Folders = logically group files  = packages 
+Access modifiers 
+	public 
+	private 
+	protected  ( inheritance) 
+	default 
+
+     <access_modifier> <data_type> variable ;
+
+	int a ;    // default --> this "a" variable can be accessed in that class and in 				  that package/folder
+
+   private int a; // highest security --> this "a" can be accessed by only that class 
+
+
+   public int a ; // highest visibilty  this "a" variable can be accesed by that class and in all class in that package/folder and in other classes in other packages/folder 
+
+
+procted int a ; // this "a" vaiable can be accessed by that class (acts as private) but accessable by sub class/child class / derived class ( inheritance ) 
+
+Note :
+  avoid default access modifier 
+
+
+Access modifier 
+	a) class 
+	b) variable 
+	c) method 
+
+Package  == folder 
+
+
+	1) eclipse --> menu --> file --> new --> package 
+	2) When you create a class then you can define the package 
+
+Rules for package 
+	1) package <package_name>;    // a) no camel casing b) all in small case
+	2) should be the first line of code 
+	   Note : may be you can have a comment above  // 
+	3) package name and folder name should be same 
+
+Note 
+  We can create N number package / folder 
+  we can also create sub folder /sub package 
+  Always create package for all class 
+  
+
+Coding standard 
+    variable must be private and avoid default 
+   fun(){
+    get the data 2021 ( 12 + 4 + 5
+  }
+ 
+// POJO  Plain Old Java Object 
+class
+   private variable 
+   public int getter()
+   public void setter( arg)
+
+
+
+ALT+SHIFT+S,R  
+
+
+Access modifier 
+package 
+POJO 
+   private 
+   public getter()
+   public setter()
+this key word ( referes the current objects variable / data 

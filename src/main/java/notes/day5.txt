@@ -1,0 +1,145 @@
+Day 5
+------
+Agenda 
+
+Core Java
+Build tool    - Maven
+Version tool  - Git  
+Testing       - JUnit 
+Logging       - Log4j 
+Java 8 features 
+Database      - Mysql / Oracle 
+JDBC 
+Spring core 
+Spring MVC (optional)
+Web service 
+   1) SOAP / XML  Web service 
+   2) RESTful web service 
+Spring RESTful service 
+Spring boot with Restful service 
+Spring Data JPA 
+
+
+Mockito
+Spring Boot testing 
+code quality  - Sonarcube 
+
+      26 day 
+Total 30 day 
+Constructor 
+    build the object then the constructor is invoked 
+
+Why ? 
+   Constructor is used to initialise the value to the variable 
+
+Rules 
+  constructor is a function    ( )
+  function name and class name should be same ( case sentitive) 
+  Does not return  , even void 
+  Access modifier  (public , never private ) 
+
+Types of constructor 
+	1)  default constructor  JVM provide 	
+	2)  non parameter constructor   ( no arguments) 
+	3)  parameterised  constructor  (with arguments) 
+	4)  Copy constructor  
+
+Ex
+public class Employee
+{
+
+   int empNo
+   String empName;
+   int age ;
+   float salary;
+	
+   public Employee(){			JVM provides default constructor (int =0 
+	this.empNo   =  100;				stop the default 
+	this.empName = "STG";
+	this.age     = 18 ;
+	this.salary  =   5000f;
+    }
+
+
+    public Employee(){			
+	this.empNo   =  100;				stop the default 
+	this.empName =  "Hello"
+	this.age     =  22 ;
+	this.salary  =  100f;
+    }
+	public Employee(int a,String b){			
+	this.empNo   =  a;				stop the default 
+	this.empName =  b
+    }
+    public Employee(int a,String b, float d,int c){			
+	this.empNo   =  c;				stop the default 
+	this.empName =  b;
+	this.age     =  a ;
+	this.salary  =  d;
+    }
+
+1) Employee objName1 = new Employee( ) ; // invoking the constructor 
+sop (objName1 .empNo) ==100
+
+2) Employee objName2 = new Employee(22,"apple",34.56f,10 ) 
+sop (objName2 .empNo) ==10
+
+3) Employee objName3 = new Employee(33,"World");
+sop (objName3 .empNo) == 33
+
+this is not a constructor but its a function 
+employee.Employee();
+
+sop (employee.empNo) == 100      default value  == 0 
+
+sop (employee.empName) == STG default value  == null
+8) employee.setSalary(7000f)				// variable == changing 
+9 sop (employee.salary) == 5000 default value  == 0.0f
+
+
+Dont want the default value / initialise some values 
+
+1) employee.setProperty(value); 
+2) constructor 
+
+
+Polymorphism 
+   Static polymorphism == Constructor overload   Method overload 
+
+
+constructor is called hen we create object (new ) 
+where us setProperty() can be called any where 
+
+
+
+	int age;			float age
+						22.6  23 
+
+
+any java . please have a default / non parameter constructor 
+
+
+windows --> .java  --> .class  ( windows JRE)
+
+			    unix  --> java .class  (Unix JRE) 
+
+
+final can be at variable 
+final can be used at method level  == no overriding (no inheritance )
+final can be used at class level   == no subclass/child/no inheritance 
+
+immutable  == can not change  == class is final 
+
+
+
+
+constructor 
+type of constructor 
+de reference == memory management  == heap  & stack 
+const  (deprecated)
+final (fixed ) 
+
+String toString()
+
+
+HashCode 

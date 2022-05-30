@@ -1,0 +1,70 @@
+Spring Boot - Exception Handling
+--------------------------------
+1) The @ControllerAdvice is an annotation, to handle the    exceptions globally.
+2) @ExceptionHandler is an annotation used to handle the specific    exceptions and sending the custom responses to the client.
+
+Demo 
+Step 1 :
+package com.exception;
+public class EmployeeNotfoundException extends RuntimeException {
+   private static final long serialVersionUID = 1L;
+}
+
+Step 2 :
+@RequestMapping(value = "/products/{id}") 
+public ResponseEntity<Object> updateProduct(@PathVariable("id") int val )     { 
+    if(val == 0)throw new EmployeeNotfoundException();
+     
+   }
+
+Step 3 :
+
+@ControllerAdvice
+public class EmployeeExceptionController {
+   @ExceptionHandler(value = EmployeeNotfoundException.class)
+   public ResponseEntity<Object> exception(EmployeeNotfoundException exception) {
+      return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+   }
+}
+
+
+To send as response by the ControllerAdvice class.
+---------------------------------------------
+
+Step 1 : 
+
+public class ExceptionResponse {
+
+	private String errorMessage;
+	private String requestedURI;
+
+Step 2 :
+
+@ControllerAdvice
+public class ExceptionHandlerControllerAdvice {
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public @ResponseBody ExceptionResponse handleResourceNotFound(final ResourceNotFoundException exception,
+			final HttpServletRequest request) {
+
+		ExceptionResponse error = new ExceptionResponse();
+		error.setErrorMessage(exception.getMessage());
+		error.callerURL(request.getRequestURI());
+
+		return error;
+	}
+
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public @ResponseBody ExceptionResponse handleException(final Exception exception,
+			final HttpServletRequest request) {
+
+		ExceptionResponse error = new ExceptionResponse();
+		error.setErrorMessage(exception.getMessage());
+		error.callerURL(request.getRequestURI());
+
+		return error;
+	}
+
+}

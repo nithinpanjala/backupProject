@@ -1,0 +1,143 @@
+cmd > location of pom.xml
+cmd > mvn clean install
+
+
+
+Super ()  
+	- inoke the parent constructor through the child constructor 
+		public Parent() {
+		    super(); // Object constructor public class Child extends Parent {
+
+	}
+
+
+ 	public class Child extends Parent {
+
+	public Child() {
+		super(); // invoking the parent constructor 
+		System.out.println("Child constructor");
+	}
+
+
+Rule 
+ super() should be the first line of code in constructor
+ super() is optional (even you dont defined it is default understood) 
+
+
+
+Advantage of inheritance 
+
+- through the child object we access childs behaviour/function + parent behaviour/function + grandParent behaviour (Object) 
+
+Multilevel inheritance 
+
+	A extends Object 
+
+	B extends A
+
+
+	c extends B
+
+Java avoids multiple inheritance  (2 parent for one child ) 
+
+	A			B
+
+
+
+		c extends A, B   	(not possible in Java ) 
+
+Interface 
+- > its a collection variables but each variable is public static final 
+- > collection one or more abstract method / Pure abstract method 
+- > can not have constructor 
+- > interface can not be instantiate 
+
+
+Why 
+
+since java does not support multiple inheritance so we achieve multiple inheritance 
+
+Syntax of defining an interface 
+
+class <classNAme>{					interface <InterfaceName>{
+	int var;				 public static final	int VAR =value
+
+	behaviour(){				public void display(); 
+
+	// concremethod 			// method declaration 
+						// NO definition (no body
+	}
+
+	}
+
+
+
+Static 
+ --> key word == Reserved word 
+
+ --> memory is pre created 
+ --> only one copy is created 
+
+
+Static variable 
+	ex : static int intVar ;
+static method 
+		static int add() { return 10;}
+static block 
+
+		static {  }
+
+Static can be called as Class level variable 
+
+
+
+Ex <ClassName>.staticVariable;
+
+What is instance variable 
+
+ first instantiate and the call the variable 
+
+	Employee emp = new Employee();
+
+	emp.intVar =22;
+
+Static are pre created 
+	first 
+static variable 
+	ClassName.staticVariable  == class level variable 
+static method 
+	
+
+static block 
+	static { } 
+
+Where to use
+	a) when there is a common data for all instances (new) 
+	b) where developer/you  does not want to create an object 
+
+
+What is interface 
+	to over come multiple inheritance 
+	its a collection variable/s or method/s 
+	but variable defined in interface are 
+		public static final    // const == immutable  == assign value 
+	 pubic abstract ()   // pure abstract function 
+Interface 
+
+  interface is a key / reserved word 
+  interface can not be instantiated 
+
+How to use 
+	className extends Inheritance 
+
+	ClassName implements InterfaceName {   }
+
+	ClassName implements InterfaceName1,InterfaceName2 {   }
+
+Why 
+we want to have common behaviour/ method() 
+
+  
+Difference betweeen abstract and interface 
+Marker inteface 
+

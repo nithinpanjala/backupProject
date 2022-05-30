@@ -1,0 +1,148 @@
+data type 
+
+ primitive 
+	1) byte
+	2) short 
+	3) int 
+	4) long 
+	5) float 
+	6) double
+	7) char
+	8) boolean 
+
+ Derived 
+	array [ ]
+
+
+ User defined / developer (store hetro(multiple) data type) 
+   Template 
+   blue print 
+   based on class we create object 
+
+struct Employee{					class Employee{
+  int empId;							int empId;
+  char name[ ];							String name;
+  float salary;							float salary
+}obj1,obj2;						}
+
+							int var = 12
+obj1.empId =10;						Employee obj1 = new Employee();
+obj1.name  ="Hello"
+obj1.salary= 1234.56f
+
+
+new 
+	key /reserved word 
+	creating an object 
+	instantation  = object creation 
+
+
+Memory 
+	1) Stack 
+	2) Heap 
+
+Garbage collector 
+
+class <ClassName>{
+
+   <data_type>	variable1; == property == field  == attribute == (oop) ==   state
+   <data_type>	variable2;
+   <return_data_type)	methodName( ){	 == method == function  == procedure == behaviour
+
+	}
+	void methodName2(int arg ){
+
+	}
+
+}   // body of class 
+
+
+Structure can only have variable 
+
+but in a class we have varible/variables +  method /methods 
+
+
+
+=  assignment    LHS = RHS  ex : int a = 10;
+
+== compare 	 LHS == RHS   ex  if( a == 10){
+					SOP ("Same");
+				  else{
+				   	SOP ("Different");
+				    }
+
+function can return only one value 
+
+
+Day 2 : assignment  (behavior / function / method) 
+
+1) Complete the subtraction,multiplication , division 
+
+2) How many times the name should be displayed 
+
+3) accept the name and how many times should it be printed 
+
+4) get the fullname of the employee  (return) 
+
+5) create 2 employee and sum their salary  
+
+6) create 2 employee and let me know who is drawing higher salary 	 
+
+
+
+
+What is class ?
+
+what is Object ? 
+
+What is encapsulation ?
+
+What are the data type is java?
+
+What are the Operators in java ?
+
+conditional statement 
+	if  
+	if else 
+
+Switch case 
+
+What are looping statement 
+
+
+
+
+
+code 
+  1) class (based on class we create object) 
+	object is an instance of a class 
+  2) think  --> object  --class
+
+
+
+Multiple java 
+function : void  ( that does return any value)
+function : return 
+function : no parameter 
+function : single parameter 
+function : more than one parameter 
+
+Day 3
+
+Function : array 
+function : return an array 
+function : object 
+function : return object 
+function : array of objects
+function : return array of objects
+
+
+constructor
+this 
+destructor in C ++ == de reference 
+access modifiers 
+package 
+polymorphism 
+
+
+

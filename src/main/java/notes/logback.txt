@@ -1,0 +1,51 @@
+Logging 
+
+Step 1 : pom.xml 
+	<properties>
+	    <org.slf4j-version>1.7.5</org.slf4j-version>
+	</properties>
+
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${org.slf4j-version}</version>
+	</dependency>
+
+Step 2 : logback.xml
+
+<configuration debug="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>tests.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+     
+    <logger name="com.baeldung.logback" level="INFO" /> 
+    <logger name="com.baeldung.logback.tests" level="WARN"> 
+        <appender-ref ref="FILE" /> 
+    </logger> 
+
+   <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+
+
+Step 3 : 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+private static final Logger logger = LoggerFactory.getLogger(MyClass.class);
+logger.info("Welcome to log");

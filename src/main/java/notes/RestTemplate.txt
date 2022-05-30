@@ -1,0 +1,85 @@
+RestTemplate
+------------
+- Rest Template is used to create applications that consume RESTful Web   Services.
+- The RestTemplate class is a synchronous client that is designed to call   REST services.
+- The HTTP protocol’s methods HEAD, GET, POST, PUT, DELETE, and OPTIONS
+- The exchange() method to consume the web services for all HTTP     methods.
+
+
+Step 1 :  https://start.spring.io/
+Dependencies
+	Spring Web
+	Spring Boot DevTools
+
+	jar
+
+Step 2 : create Bean for Rest Template to auto wiring the Rest          Template object. 
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+public class DemoApplication {
+   public static void main(String[] args) {
+      SpringApplication.run(DemoApplication.class, args);
+   }
+   @Bean
+   public RestTemplate getRestTemplate() {
+      return new RestTemplate();
+   }
+}
+
+Step 2 :
+
+@RestController
+public class ConsumeWebService {
+   @Autowired
+   RestTemplate restTemplate;
+
+   @RequestMapping(value = "/clientURI")
+   public String getProductList() {
+      HttpHeaders headers = new HttpHeaders();
+      headers.setAccept(Arrays.asListMediaType.APPLICATION_JSON));
+      HttpEntity <String> entity = new HttpEntity<String>(headers);
+      
+      return restTemplate.exchange("
+         http://localhost:8080/producerURI", HttpMethod.GET, 		entity, String.class).getBody();
+   }
+}
+
+Ex 2 : create with post
+
+ HttpHeaders headers = new HttpHeaders();
+ headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));      HttpEntity<Product> entity = new HttpEntity<Product>(product,headers);
+      
+  restTemplate.exchange(
+         "http://localhost:8080/products", HttpMethod.POST, entity,              String.class).getBody(); 
+
+Ex 3 : 
+a) Create an Account class (receiving side)
+b) 
+Account account = restTemplate.getForObject   ("http://localhost:9091/acct/readaccountbyid/" +           employee.getEmpId() ,Account.class);
+
+
+Ex 4 : update == put
+
+ HttpHeaders headers = new HttpHeaders();
+ headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+ HttpEntity<Product> entity = new HttpEntity<Product>(product,headers);
+      
+  return restTemplate.exchange(
+         "http://localhost:8080/products/"+id, HttpMethod.PUT, entity, String.class).getBody();
+   }
+}
+
+Ex 5 : delete
+
+public String deleteProduct(@PathVariable("id") String id) {
+  HttpHeaders headers = new HttpHeaders();
+  headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+  HttpEntity<Product> entity = new HttpEntity<Product>(headers);
+      
+  return restTemplate.exchange(
+         "http://localhost:8080/products/"+id, HttpMethod.DELETE, entity,               String.class).getBody();
+   }
+}

@@ -1,0 +1,113 @@
+Java 8 
+
+-> Functional Programming   fun( int a  ), fun(int[ ] a), fun(Employee emp)
+
+			
+
+Change in Interface from Java 8
+
+Prior to JDK <1.8 
+
+Interface 
+
+ - interfaces can have abstract methods (pure abstract method) and variables (public    static final). 
+ - It cannot have a method body only method declaration.
+ - Interfaces form a contract for all implementation classes to have a common     behaviour/function/method() 
+- The interface in Java is to achieve abstraction
+- Java Interface also represents the IS-A relationship.
+- To implement interface use implements keyword.
+
+syntax
+public interface <interface_name>
+{
+    public static final <data_type> variableName = value;
+    public abstract <return type> functionName(arg1,arg2);
+}
+
+class InterfaceImpl implements <interface_name>
+
+From JDK >= 1.8
+
+1) Default was introduced in java 1.8 
+2) Java provides a facility to create default methods inside the interface. 
+3) Methods which are defined inside the interface and tagged with 'default' are known as    default methods.
+4) Default methods enable you to add new functionality to the interfaces of your    libraries and ensure binary compatibility with code written for older versions of    those interfaces. 
+
+Syntax
+
+public interface <interface_name>{
+   public  default <return_type> methodName(){
+         //logic;
+    }
+}
+
+
+Static method in Interface
+---------------------------- 
+- Static Methods in Interface are those methods, which are defined in the interface with   the keyword static
+- These static methods contain the complete definition of the function and since the     definition is complete and the method is static, therefore these methods cannot be   overridden or changed in the implementation class.
+
+public interface NewInterface {
+ 
+    // static method
+    public static void hello()
+    {
+        System.out.println("Hello, New Static Method Here");
+    }
+
+Nested class 
+
+- In Java, it is possible to define a class within another class, such classes are known   as nested classes.
+-  A nested class is also a member of its enclosing class.
+
+Nested classes are divided into two categories
+1) static nested class : Nested classes that are declared static 
+2) inner class  or non-static nested class
+
+class OuterClass
+{
+...
+    class InnerClass
+    {
+        ...
+    }
+} 
+
+
+Anonymous Inner Class in Java
+-------------------------------
+- It is an inner class without a name and for which only a single object is created.
+- Anonymous inner classes are useful in writing implementation classes.
+- Anonymous inner classes  will be terminated with semicolan (;) 
+
+Functional Interface 
+
+- A functional interface is an interface that contains only one abstract method. 
+  Single Abstract Method (SAM) 
+
+- Runnable interface, Comparable interface are some of the examples of functional   interfaces. 
+
+public interface java.lang.Runnable {
+  public abstract void run();
+}
+
+public interface java.lang.Comparable<T> {
+  public abstract int compareTo(T);
+}
+
+- representing the interface with an annotation called @FunctionalInterface
+
+
+
+ lambda expression  -> (Arrow notation     => in JS) 
+
+Where to use FI 
+
+LHS  = RHS 
+
+Predeined functional interface 
+
+FI   = ->
+FI   =   ::  Method reference 
+
+Streams 

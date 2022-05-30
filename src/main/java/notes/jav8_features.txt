@@ -1,0 +1,110 @@
+Java 8 features 
+
+Change in interface 
+	1) default method () { } 	// backword compatability 
+	2) static method( ) { } 
+
+FunctionalInterface 
+  a) SAM 
+	a) User defined 
+	b) predefined  (provided by JDK 1.8) 
+
+LambdaExpression 
+    - Consise code 
+    -> Arrow notation to represent lambda  
+
+	LHS        =  RHS 
+	int  ans   = obj.add(2,3);
+	FI	   =	->
+
+Annotation 
+ -- Meta Info 
+  -- can be at class level, method level , variable 
+  -- @  
+  -- (like interfaces ) 
+
+JDK 
+1) @Override 
+2) @SuppressWarning
+3) @Deprecated 
+
+
+What to do with the abstract method 
+
+
+
+User defined interface  == Predefined functional interface 
+
+Optional 
+   To avoid nullpointer 
+
+method reference
+--------------------
+- Java provides a new feature called method reference in Java 8. 
+- Method reference is used to refer method of functional interface. 
+- It is compact and easy form of lambda expression (->)
+- In method reference we use :: (2 colan) 
+
+
+		FI = -> 
+
+		FI = ::
+
+There are following types of method references in java:
+	1) Reference to a static method.
+	2) Reference to an instance method.
+	3) Reference to a constructor.
+
+
+
+Steams
+   ParallelStream 
+   SequentialStream 
+
+nested query  --
+
+
+Where the data source has more than one data (file , Collection) 
+
+
+Intermediate Operation  ()	lazy - no process is until terminal 
+
+				There can be no/one/more intermediate operation 
+
+	
+
+Terminal Operation  ()
+
+				Where final operation 
+				there can only one Terminal 
+Here is the list of all Stream intermediate operations:
+
+	filter()
+	map()
+	flatMap()
+	distinct()
+	sorted()
+	peek()
+	limit()
+	skip()
+
+
+terminal operations:
+
+	toArray()
+	collect()
+	count()
+	reduce()
+	forEach()
+	forEachOrdered()
+	min()
+	max()
+	anyMatch()
+	allMatch()
+	noneMatch()
+	findAny()
+	findFirst()
+
+
+
+   

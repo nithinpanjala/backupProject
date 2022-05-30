@@ -1,0 +1,287 @@
+Day 6
+---------
+
+
+Build tool 
+	ANT 
+	Maven 
+	Gradel 
+
+Tool  / software  --> Mavam  ( Project Management tool ) 
+
+API Application Programming Interface
+
+Predeined .class 
+
+System.out.println()
+System 
+
+Default package 
+
+	java.lang.*;
+* wild character 
+
+
+
+Jar
+war
+ear
+
+Eclipse  --> project_name --> right clicked --> Export 
+
+<Filename>.java  ( source)
+
+cmd > javac <Filename>.java 
+      <Filename>.class    ( byte code -- 0/1) JVM  --> interpret  --.class  -- Machine
+							JIT 
+
+	
+
+Maven -- build --> software 
+	apache-maven-3.8.4-bin.zip 
+	 --> right --> extract  
+
+Step  : down the maven software 
+
+Step 2 :  extract 
+
+Step 3 : map in Environment variable 
+	
+	1)path = C:\Program Files\Java\jdk1.8.0_321\bin; 
+ 		 D:\Jas_STG\Software\Maven\apache-maven-3.8.4\bin
+	2) JAVA_HOME 
+		C:\Program Files\Java\jdk1.8.0_321
+	
+	3) M2_HOME = D:\location\Software\Maven\apache-maven-3.8.4
+Step 4: open a fresh commpand prompt   / new 
+	cmd > mvn  
+
+
+
+How to check ?
+
+cmd >  echo %path%
+
+cmd > echo %JAVA_HOME%
+
+cmd > echo %M2_HOME%
+
+
+cmd >  mvn  
+
+
+Configuration 
+	POM.XML 	(Project Object Model ) 
+			EXtensible markup language 
+
+
+<dependencies>
+	<dependencie> JDK 1.8<dependencie>
+
+	milk
+	sugar 
+
+
+ </dependencies>
+
+Group id : <package >
+artifact : <project name> 
+
+Step 4 : pom.xml 
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.stg</groupId>
+	<artifactId>firstmavenproj</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+</project>
+
+
+Step 5 : go to the location of pom.xml 
+
+	cmd > mvn clean install
+
+	// download the dependencies 
+
+
+Collection .class +  interfaces +  packages + 
+ 
+
+
+Should not allow users to create object  == avoid "new"
+
+public abstract class <ClassName>
+
+What is abstract 
+ is a key word 
+ 
+
+Why 
+ to avoid creating instances / objets
+
+We defined the contract (common data) 
+
+How to invoke an abstract class ?
+
+ Inheritance  ==  extends 
+
+
+What is abstract class 
+
+ 1) can not instantiated  ( can not create object  == new) 
+Rules 
+  1)  a class with a prefix of abstract "keyword" will stop the instansation 
+  2)  an abstract can have variable / state and function / behaviour with a key word      "abstract "at the class level 
+  3) a class can have method declaration then that function is called abstract function       (no body { } ) 
+  4) In a class if we have only method declaration / prototype then the method is defined      as abstract and since one or more methods in a class is abstract then the class      becomes abstract class (no new key word")
+
+
+Declaration 		
+	int a ; 				public abstract void display() ;  no body
+Definition 
+	a = 10;					public void display() { //logic } 
+
+
+Why abstract class 
+
+
+
+
+Inheritance 
+
+Why  
+   1) Re use  the existing class 
+
+   2) inherit the property/state and methods/behaviour from an existing class 
+
+   Syntax  
+	ChildClass extends ParentClass 
+
+	DerivedClass extends SuperClass  (parent) 
+
+	SubClass    extends SuperClass 
+
+Drawback 
+
+1) a class can externd only one super class (multi level)
+
+
+Java does not support multiple inheritance  ( can not have more than one parent_ 
+
+Ex 
+
+  ChildClass extends Parent1,Parent2 
+
+
+
+Runtime polymorphism 
+	(method override)  where method signature is same as chbild signature 
+
+Static Polymorohism 
+	(method overload) where methods name are same but arguments should be different 
+
+
+
+
+Maven 
+
+abstract 
+    abstract function()
+
+     abstract class 
+
+
+Abstract 
+1) if a class is declared abstract 
+
+	public abstract  class ClassName{
+
+		 private int variable;
+
+	
+		  public void method() {
+
+			}
+
+	}
+
+
+Since the class is declared as abstract we cannot create an object 
+	
+	ClassName  var = new ClassName( ) ; //is not possible 
+
+
+Then what is the purpose of the abstract class?
+
+   --> Abstraction 
+
+
+		Doctor doctor  =   new Ent()  
+		AbstractClass var  = object for a concrete class / complete class 
+		Employee employee = new ContractEmployee()
+
+Disadvantage
+	we can only call the public methods defined in abstract class 
+
+
+Dynamic polyphism 
+ 	--> inheritance 
+
+		--> method overriding 
+
+			the method signature  in parent class  must be the same in child class 
+
+
+Inheritance 
+   One class extends Anotherclass 
+
+Java - Muliple inheritance is not possible 
+
+	One class extends AnotherClass1 , Anotherclass2
+
+
+
+class Employee extends Object {
+
+
+}
+
+
+class ContractEmployee extends Employee{
+
+}
+
+
+
+
+Vehicle 
+   move()
+
+
+2Wheel extends Vehicle    3 wheel 4wheel 6wheel 
+
+
+
+
+bicycle bike scottor 
+
+
+          100CC
+
+	  Bajaj
+	
+		Pular
+		   5 gear  
+
+
+
+
+
+
+
+

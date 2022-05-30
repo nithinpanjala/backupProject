@@ -1,0 +1,46 @@
+Logging in Spring Boot
+----------------------
+- Spring boot supports various logging.
+- supported logging providers (Java Util Logging, Log4J2, and Logback)      based on configuration provided.
+- If we do not provide any logging specific configuration, we will still   see logs printed in “console”. These are because of default logging   support provided in spring boot which uses Logback.
+- Logback supports ERROR, WARN, INFO, DEBUG, or TRACE as logging level. 
+- By default, logging level is set to INFO. It means that code >DEBUG and   TRACE messages are not visible.
+
+Step 1 : application.properties 
+
+server.port = 8081
+
+logging.file.name=MyApp.log
+logging.pattern.rolling-file-name=MyApp-%d{yyyy-MM-dd}.%i.log
+logging.file.max-size=1MB
+logging.file.total-size-cap=10MB
+logging.file.max-history=30
+logging.file.clean-history-on-start=true
+
+
+Notes :
+- the first property specifies the original log file name, and the second   one specifies the pattern for the files which will be rolled out the     next days (daily rolling). 
+- logging.file.max-size=1MB  (This keeps the maximum size of each log file   around 1MB. A new log file will be rolled out if size of the current log   file exceeds this number.
+- logging.file.total-size-cap=10MB ( If this property is used, Logback   will delete the oldest log files in order to keep the total size doesn’t   exceed the specified value.)
+- logging.file.max-history=30 ( This tells Logback to delete the archived    log files that are older than 30 days. If this property is not   specified, the default is 7 days.
+- logging.file.clean-history-on-start=true (So when our Spring Boot   application starts, Logback will clean the old log files based on the   values of total size and max history. This property is set to false by   default.)
+
+Step 2 : 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+@RestController
+public class HelloController {
+
+	 private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+
+	    @GetMapping("/")
+	    public String hello(Model model) {
+
+	        List<Integer> data = Arrays.asList(1, 2, 3, 4, 5);
+
+	        logger.info("Hello from Logback {}", data);
+
+	       return "Welcome to logging"; // index.html
+	    }
+}

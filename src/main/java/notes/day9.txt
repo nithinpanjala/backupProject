@@ -1,0 +1,104 @@
+Day 9 
+-----
+Static data
+   data is hardcoded
+	int a = 10;   // not advised 
+Dynamic data 
+    user 
+
+data from colsole  ( command line argument )
+
+	cmd > Javac FileName.java   	// compiler  == source/ src 
+	            FileName.class	// Byte code  == not human readable or machine 
+
+	cmd > java  FileName		// JVM -->.class --> convert -- LLL/machine
+
+cmd > java  FileName arg1 arg2 data1 data2 "12" // runtime 
+
+Class ClassName{
+
+    public static void main (String[ ] args)   // read data from console 
+       {
+	SOP (args[0])  ;   // "arg1"
+
+ 	SOP (args[4])  ;   // "12"
+	}
+
+IF we are  using cmd  == IDE == Eclipse 
+
+Every data in command line is of type String 
+
+
+How to convert String (object ) to primitive data type ( vise versa) 
+
+  Wrapper class 
+
+   primitive Data type 			Wrapper class
+
+	int 				Integer 
+	float				Float 
+	byte				Byte
+	boolean				Boolean 
+	double				Double 
+
+
+Alt + Shift + s + r==  generate getter and setter 
+Exception 
+			 Object 
+ 			   |
+			 Throwable (subclass)
+			   |
+		   |			|
+		Error			Exception   (developer can handle in program 
+	Can not be handled 		
+	Out side the JVM 		Checked excetion 	unCheckedException 
+					Developer has to check	  JVM would handle 
+		Out of memory 
+
+HEAP 
+
+
+
+
+	try{
+
+      // posibilty of raising an exception 
+	}
+	catch( )
+        {
+	// solution for the exception
+
+	}
+
+
+	try{
+
+      // posibilty of raising an exception 
+	}
+	catch(1 )
+        {
+	// solution for the exception
+
+	}
+	catch(1 )
+        {
+	// solution for the exception
+
+	}
+
+
+Throw 
+throws
+customexception 
+
+
+
+
+
+
+
+
+
+
+
+

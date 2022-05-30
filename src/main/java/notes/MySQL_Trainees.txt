@@ -1,0 +1,250 @@
+Structured Query Language(SQL) 
+
+-  SQL commands are mainly categorized into four categories
+	1) DDL – Data Definition Language
+	2) DQl – Data Query Language
+	3) DML – Data Manipulation Language
+	4) DCL – Data Control Language
+
+DDL
+	1) CREATE: 
+	2) DROP: 
+	3) ALTER: 
+	4) TRUNCATE: 
+	5) COMMENT: 
+	6) RENAME: 
+
+DQL (Data Query Language):
+	SELECT
+
+DML(Data Manipulation Language): 
+
+	1) INSERT : 
+	2) UPDATE: 
+	3) DELETE :
+	4) LOCK: 
+
+DCL (Data Control Language):
+
+	GRANT:   privileges to the database.
+	REVOKE:  withdraws the user’s access
+
+TCL
+
+	COMMIT: 
+	ROLLBACK: 
+	SAVEPOINT:
+
+Data of MySQL  ( Open source / freewear)  --> Oracle 
+
+	Latest : 8.X 
+
+1) CLI Command Line interface 
+2) GUI --> Workbench 
+
+
+windows --> start --> mysql 8 command line 
+
+Default user name  : root 
+	password   : Reset123       == root
+
+mysql > select version();
+mysql > select current_date; (date)
+mysql > select now();    (date and time )
+mysql > show databases;   ( Schema)
+
+
+coding standard key word / reserved are in capital ( not case sensitive) 
+
+mysql > CREATE DATABASE db1;
+mysql > USE db1;
+
+Syntax for creating a table 
+
+CREATE TABLE [IF NOT EXISTS] table_name(
+   column_1_definition,
+   column_2_definition,
+   ...,
+   table_constraints
+) 
+
+https://www.mysqltutorial.org/mysql-basics/
+
+
+CREATE TABLE IF NOT EXISTS usertbl (
+   id  int(5) NOT NULL auto_increment,
+   username varchar(25)  NOT NULL default ' ',
+   password varchar(25)  NOT NULL default ' ',
+   PRIMARY KEY  (id)
+ );
+
+mysql  > describe usertbl;	(or)
+mysql  > desc usertbl;
+
+
+Data types in MySQL
+
+1) CHAR  (0 - 255) 
+2) INT   (-2147483648 to 214748-3647)
+3) VARCHAR String (0 - 255) 
+4) BIGINT  (-9223372036854775808 to 9223372036854775807)  //long 
+5) TINYTEXT String (0 - 255) 
+6) FLOAT Decimal (precise to 23 digits)
+7) TEXT String (0 - 65535) 
+8) DOUBLE Decimal (24 to 53 digits)
+9) BLOB String (0 - 65535) 
+10) DECIMAL "DOUBLE" stored as string
+11) MEDIUMTEXT String (0 - 16777215) 
+12) DATE YYYY-MM-DD
+13) MEDIUMBLOB String (0 - 16777215) 
+14) DATETIME YYYY-MM-DD HH:MM:SS
+15) LONGTEXT String (0 - 4294967295) 
+16) TIMESTAMP YYYYMMDDHHMMSS
+17) LONGBLOB String (0 - 4294967295) 
+18) TIME HH:MM:SS
+19) TINYINT Integer (-128 to 127) 
+20) ENUM One of preset options
+21) SMALLINT Integer (-32768 to 32767) 
+22) SET Selection of preset options
+23) MEDIUMINT Integer (-8388608 to 8388607) 
+24) BOOLEAN TINYINT(1)
+
+
+https://www.mysqltutorial.org/wp-content/uploads/2018/03/MySQL-Data-Types.pdf
+
+
+Insert 
+
+a) INSERT INTO table(c1,c2,...) VALUES (v1,v2,...);
+b) insert multiple rows
+	INSERT INTO table(c1,c2,...)
+		VALUES 
+   		(v11,v12,...),
+   		(v21,v22,...),
+    		...
+   		(vnn,vn2,...);
+c) INSERT INTO table VALUES (v1,v2,...); // all values are mandatory 
+
+
+
+Syntax : ALTER TABLE <table_name> RENAME COLUMN <old_col_name> TO <new_col_name>;
+
+SQL > ALTER TABLE usertbl RENAME COLUMN id TO user_id;
+
+Add a new column 
+syntax : 
+ALTER TABLE table_name ADD  new_column_name column_definition
+    		[FIRST | AFTER column_name]
+
+sql > ALTER TABLE usertbl ADD age int ;
+
+Multiple column add
+
+Ex >  ALTER TABLE vehicles ADD color VARCHAR(50), ADD note VARCHAR(25);
+
+
+ Drop a column
+
+Syntax : ALTER TABLE table_name DROP COLUMN column_name;
+
+Ex :  ALTER TABLE usertbl DROP COLUMN age ;
+
+Rename table
+
+Syntax :ALTER TABLE table_name RENAME TO new_table_name;
+
+sql > ALTER TABLE usertbl RENAME TO user;
+
+Inserting dates into the table
+
+1) ALTER TABLE user ADD dob date;
+
+MYSQL format  'YYYY-MM-DD'   SQL > select current_date;
+
+2) INSERT INTO user (user_id , username , password, dob) VALUES ( 11, 'Hello','World','2022-01-20');
+
+3) INSERT INTO user ( username , password, dob) VALUES ( 'Good','Evening', CURRENT_DATE());
+
+4) INSERT INTO user ( username , password, dob) VALUES 
+			( 'Thank','You','2021-02-26'),
+			( 'Lunch','Break','2020-05-15');
+
+
+
+MySQL SELECT statement
+---------------------
+
+
+SQL > SELECT * from user;
+
+SELECT C1,C2 FROM table_name; (selective column) 
+
+mysql> SELECT user_id,username from user;
+
+
+MySQL ORDER BY clause
+----------------------
+
+SELECT  select_list  FROM  table_name ORDER BY column1 [ASC|DESC], column2 [ASC|DESC],...;
+
+SQL > SELECT  *  FROM  user ORDER BY user_id ASC;
+
+SQL> SELECT  *  FROM  user ORDER BY user_id DESC;
+
+mysql> SELECT  *  FROM  user ORDER BY username ASC; //based on string
+
+mysql> SELECT  *  FROM  user ORDER BY dob;
+
+mysql> SELECT  *  FROM  user ORDER BY dob DESC;
+
+ORDER BY    column1 ASC, column2 DESC;  ( more than 1 column) 
+
+mysql>  SELECT  *  FROM  user ORDER BY user_id DESC, username ASC ;
+
+
+
+MySQL WHERE clause
+------------------
+
+SELECT  select_list FROM table_name WHERE search_condition;
+
+
+SQL > SELECT  *  FROM  user WHERE user_id =12;
+
+SQL > SELECT  *  FROM  user WHERE user_id > 12;
+
+SQL > SELECT  *  FROM  user WHERE user_id > 12 AND username ='Lunch'; // 2 condition
+
+sql > SELECT  *  FROM  user WHERE user_id > 12 OR username ='Lunch';
+
+SQL > SELECT  *  FROM  user WHERE user_id !=12;		
+
+
+BETWEEN operator 		( Range)
+------------------	
+
+SELECT c1 , c2 FROM <table_name> WHERE C1 BETWEEN 1 AND 3;
+
+sql > SELECT * from user WHERE user_id BETWEEN 11 and 13;
+
+SQL > SELECT username  from user WHERE user_id BETWEEN 11 and 13; // even Col is not selected 
+
+
+
+ LIKE operator			(pattern) To form a pattern, you use the % and _ wildcards.
+------------- 
+
+SELECT  c1 , c2 FROM <Table_Name> WHERE Col_name LIKE '<pattern>'
+
+SQL > SELECT user_id  , username  FROM user WHERE username LIKE 'T%';
+SQL > SELECT user_id  , username  FROM user WHERE username LIKE '%d';
+SQL > SELECT user_id  , username  FROM user WHERE username LIKE 'G_ _d';
+
+SQL SELECT user_id  , username  FROM user WHERE username LIKE '%G %d';
+
+
+
+https://www.mysqltutorial.org/mysql-where/
+
+IN operator 
+-------------

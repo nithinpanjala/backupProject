@@ -1,0 +1,146 @@
+Abstract class 
+
+	have multilvel inheritance 
+
+	A extends Object 
+
+
+	B extends A
+
+
+
+	c extends B 		or  	C extends A 
+
+
+
+Overcome the multiple intheritance in Java we use interface 
+
+What is interface ?
+
+class ClassName{					interface InterfaceName
+
+  private int var;				<public static final>   int VAR = value;
+
+
+  void method(){				<public abstract>  void method() ; // no body 
+
+
+N number()					  
+  }
+
+
+ClassName objRef = new new ClassName()			// can not instantiate 
+
+								abstract method 
+
+
+
+
+Why Interface 
+
+When we want common behaviour/function 
+abstractaction  ( hidding the implementation) 
+
+
+
+
+Polymorphism 
+	Static 
+		method overload
+	Runtime 
+		Method overide (inheritance : extends ) 
+
+
+If 2 abstract class has same method signature (solution ) 
+
+	
+Difference between overload and override  ?
+
+what is overload ?
+in a class if we have two or more function with same name but with different argument/parameter 
+
+	class Calculator{
+	 	int add( int a , int b ) { } 
+
+		float add (int a , int b )  { }  // wrong 
+
+	  }
+
+Does return type matter? 
+	return type does not matter in overload only argument matters 
+
+What is override ?
+1) only in inheritance (extends / implements) 
+
+What is override 
+
+the parent class has a method signature and the subclass also has the same method signature of the parent
+
+
+In context to override does the return type matter ?? 
+
+The return types does matter but not in case of overload 
+
+Does the access modifier matters 
+	Parent can have lower or equal access modifier 
+	but child should have equal or greater access modifier  
+
+
+Protected is access modifier 
+
+	# in the class diagram 
+	protected would act like private to other class   but public to inherited class  
+
+
+Marker interface 
+
+	an interface which does not have any abstract method
+
+
+String 
+ is class  (pedefined class)
+	java.lang.String 
+
+Default package 
+	java.lang.* ;
+			* wild charater (all .class 
+
+
+#include<stdio.h>			import java.lang.*
+
+
+
+printf()
+scanf()
+
+Two types 
+ String literal
+	ex : String str = "Hello" ; // created in String pool  
+ String object
+	    String str = new String("Hello") ;
+
+	     str = null;
+ 
+
+String are immutable (fixed == constant )
+
+Update /Alter /Modify the string data 
+
+StringBuffer   ( some extra space = 16) 
+
+
+StringBuilder 
+
+Exception handling  ( day 9) 
+
+	Checked Exception 
+	unchecked exception 
+
+	try{  }.... catch()
+	try{  }.... catch(),catch2()
+	try{  }.... catch(),finally{ } 
+	try{  }.... finally{ } 
+	throw 
+	throws 
+predefined exception 
+User defined exception 

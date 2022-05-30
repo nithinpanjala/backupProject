@@ -1,6 +1,8 @@
 package com.foodmunch.Services;
 
 
+import java.util.List;
+
 import com.foodmunch.Entity.Customer;
 import com.foodmunch.Exceptions.CustomException;
 
@@ -41,6 +43,7 @@ public interface CustomerService {
 	 */
 	public String deleteByUserIdAndUserPassword(long userId, String userPassword) throws CustomException;
 	public String deleteByUserNameAndUserPassword(String userName, String userPassword) throws CustomException;
+	public List<Customer> getAllCustomers();
 
 	
 

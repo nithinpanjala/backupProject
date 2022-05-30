@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import com.foodmunch.Services.CustomerService;
 import com.foodmunch.Services.FoodMenuService;
 
 
-
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -45,7 +46,7 @@ public class CustomerController {
 	 * ***********************************************************************
 	 */
 	
-	@PostMapping(value = "/createUser/{user}")
+	@PostMapping(value = "/createUser")
 	public ResponseEntity<Customer> createUser(@Valid @RequestBody Customer user) {
 
 		return new ResponseEntity<Customer>(customerService.userSignUp(user), HttpStatus.ACCEPTED);
@@ -63,6 +64,12 @@ public class CustomerController {
 			@PathVariable("userPassword") String userPassword) {
 		return new ResponseEntity<Customer>(customerService.readUser(userId, userPassword), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getAllCustomers")
+	public ResponseEntity<List<Customer>> readUser() {
+		return new ResponseEntity<List<Customer>>(customerService.getAllCustomers(), HttpStatus.OK);
+	}
+	
 	
 	@GetMapping(value = "/readUserByUserNameAndPassword/{userName}/{userPassword}")
 	public ResponseEntity<Customer> readUserByUserNameAndPassword(@Valid @PathVariable("userName") String userName,

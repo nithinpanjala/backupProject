@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodmunch.Entity.Customer;
 import com.foodmunch.Entity.CustomerAddress;
+import com.foodmunch.Entity.Restaurant;
 import com.foodmunch.Exceptions.CustomException;
 import com.foodmunch.Repository.CustomerAddressRepository;
 import com.foodmunch.Repository.CustomerRepository;
@@ -39,6 +40,12 @@ public class CustomerServiceImpl implements CustomerService {
 	return userRepository.save(user);
 	}
 
+	@Override
+	public List<Customer> getAllCustomers(){
+		return userRepository.findAll();
+
+	}
+	
 	@Override
 	public Customer updateUserPassword(long userId, String userPassword, String newUserPassword) throws CustomException {
 

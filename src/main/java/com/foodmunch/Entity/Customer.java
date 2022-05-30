@@ -118,5 +118,39 @@ public class Customer {
 	public void setCustomerEmail(String customerEmail) {
 		this.customerEmail = customerEmail;
 	}
+
+	public Customer(long customerId, @NotEmpty(message = "Please provide a userName") String customerName,
+			@NotEmpty(message = "Please provide a userPassword") String customerPassword,
+			@NotEmpty(message = "Please provide a userfirstName") @Size(min = 3, max = 15, message = "Customer First Name must be in the range of 3 and 15") String customerFirstName,
+			@NotEmpty(message = "Please provide a userlastName") @Size(min = 3, max = 15, message = "Customer First Name must be in the range of 3 and 15") String customerLastName,
+			@NotEmpty(message = "Please provide a usermobile") @Size(min = 10, max = 10, message = "customerMobile must be 10 digits") String customerMobile,
+			@NotEmpty(message = "Please provide a userEmail") @Email(message = "Enter a valid customer Email ID") String customerEmail) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPassword = customerPassword;
+		this.customerFirstName = customerFirstName;
+		this.customerLastName = customerLastName;
+		this.customerMobile = customerMobile;
+		this.customerEmail = customerEmail;
+	}
+
+	public Customer(long customerId, @NotEmpty(message = "Please provide a userName") String customerName,
+			@NotEmpty(message = "Please provide a userPassword") String customerPassword,
+			@NotEmpty(message = "Please provide a userfirstName") @Size(min = 3, max = 15, message = "Customer First Name must be in the range of 3 and 15") String customerFirstName,
+			@NotEmpty(message = "Please provide a userlastName") @Size(min = 3, max = 15, message = "Customer First Name must be in the range of 3 and 15") String customerLastName,
+			@NotEmpty(message = "Please provide a usermobile") @Size(min = 10, max = 10, message = "customerMobile must be 10 digits") String customerMobile,
+			@NotEmpty(message = "Please provide a userEmail") @Email(message = "Enter a valid customer Email ID") String customerEmail,
+			Set<CustomerAddress> customerAddresses) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPassword = customerPassword;
+		this.customerFirstName = customerFirstName;
+		this.customerLastName = customerLastName;
+		this.customerMobile = customerMobile;
+		this.customerEmail = customerEmail;
+		this.customerAddresses = customerAddresses;
+	}
 	
 }

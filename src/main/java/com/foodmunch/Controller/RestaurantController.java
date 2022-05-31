@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodmunch.Entity.Restaurant;
+import com.foodmunch.Entity.Customer;
 import com.foodmunch.Entity.FoodMenu;
 import com.foodmunch.Services.RestaurantServices;
 
-
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping(value = "/RestaurantOperations")
 public class RestaurantController {
@@ -53,6 +55,12 @@ public class RestaurantController {
 
 	}
 	
+	
+	@GetMapping(value = "/getAllRestaurant")
+	public ResponseEntity<List<Restaurant>> getAllRestaurant() {
+		return new ResponseEntity<List<Restaurant>>(restaurantServices.getAllRestaurants(), HttpStatus.OK);
+	}
+	
 	/*
 	 *  Restaurant update operations
 	 */
@@ -74,58 +82,6 @@ public class RestaurantController {
 	
 	}
 	
-	/* *************************************************************************
-	 *  						Dish operations
-	 *	***********************************************************************
-	 */
 	
-	
-	/* *************************************************************************
-	 *  						create  operations
-	 *	***********************************************************************
-	 */
-	
-	@PostMapping(value = "/addDishes/{dish}")
-	public ResponseEntity<List<FoodMenu> > addDishes(@RequestBody FoodMenu dish ) {
-
-		return new ResponseEntity<List<FoodMenu> >(restaurantServices.addDishes(dish), HttpStatus.OK);
-
-	}
-	
-	/* *************************************************************************
-	 *  						delete operations
-	 *	***********************************************************************
-	 */
-
-	@DeleteMapping(value = "/deleteDish/{dishId}")
-	public ResponseEntity<String> deleteDish(@PathVariable int dishId) {
-		return new ResponseEntity<String>(restaurantServices.deleteDish(dishId), HttpStatus.FOUND);
-	}
-
-	/* *************************************************************************
-	 *  						update operations
-	 *	***********************************************************************
-	 */
-	@PutMapping(value = "/updateDishQuantity/{quantity}/{dishId}")
-	public ResponseEntity<FoodMenu> updateDishQuantity(@RequestParam  int quantity,@RequestParam int dishId) {
-		return new ResponseEntity<FoodMenu>(restaurantServices.updateDishQuantity(quantity, dishId), HttpStatus.ACCEPTED);
-
-	}
-	/* *************************************************************************
-	 *  						Read operations
-	 *	***********************************************************************
-	 */
-
-	@GetMapping(value = "/readDish/{Dishid}")
-	public ResponseEntity<FoodMenu> readDish(@RequestParam int Dishid) {
-		return new ResponseEntity<FoodMenu>(restaurantServices.readDish(Dishid), HttpStatus.FOUND);
-	}
-	
-	@GetMapping(value = "/getAllDishes/{restaurantId}")
-	public ResponseEntity<Set<FoodMenu>> getAllDishes(@RequestParam int restaurantId) {
-		return new ResponseEntity<Set<FoodMenu>>(restaurantServices.getAllDishes(restaurantId), HttpStatus.FOUND);
-	}
-
-
 	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.foodmunch.Entity.FoodMenu;
 import com.foodmunch.Services.RestaurantServices;
 
+
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping(value = "/FoodMenuOperations")
@@ -73,8 +74,8 @@ public class FoodMenuController {
 	public ResponseEntity<FoodMenu> readDish(@RequestParam int Dishid) {
 		return new ResponseEntity<FoodMenu>(restaurantServices.readDish(Dishid), HttpStatus.FOUND);
 	}
-	
-	@GetMapping(value = "/getAllDishes/{restaurantId}")
+
+	@GetMapping(value = "/getAllDishes")
 	public ResponseEntity<Set<FoodMenu>> getAllDishes(@RequestParam int restaurantId) {
 		return new ResponseEntity<Set<FoodMenu>>(restaurantServices.getAllDishes(restaurantId), HttpStatus.FOUND);
 	}

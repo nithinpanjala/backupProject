@@ -4,20 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.foodmunch.Entity.CustomerAddress;
 import com.foodmunch.Entity.Restaurant;
 import com.foodmunch.Entity.RestaurantAddress;
 import com.foodmunch.Exceptions.CustomException;
 import com.foodmunch.Repository.RestaurantAddressrRepository;
+import com.foodmunch.Repository.RestaurantRepository;
 
 
 @Service
 @Transactional 
 public class RestaurantAddressServiceImpl implements RestaurantAddressService {
 
-
+	@Autowired
+	private RestaurantRepository restaurantRepository;
 
 	@Autowired
 	private RestaurantAddressrRepository restaAddressrRepository;
+
+	@Autowired
+	private RestaurantServices restaurantServices;
 
 	@Override
 	public Restaurant addAddress(RestaurantAddress address) throws CustomException {
@@ -85,9 +91,25 @@ public class RestaurantAddressServiceImpl implements RestaurantAddressService {
 
 	@Override
 	public Restaurant addRestaurantAddress(String houseNumber, String addressLane1, String addressLane2,
-			String landmark, int pincode, String district, String state, long userId) throws CustomException {
-		// TODO Auto-generated method stub
-		return null;
+			String landmark, int pincode, String district, String state, int restaurantId) throws CustomException {
+		if (restaurantRepository.findById(restaurantId).isPresent()) {
+			RestaurantAddress address = new RestaurantAddress();
+			address.setRestaurantBuildingNumber(houseNumber);
+			address.setRestaurantAddressLane1(addressLane1);
+			address.setRestaurantAddressLane2(addressLane2);
+			address.setRestaurantLandmark(landmark);
+			address.setRestaurantPincode(pincode);
+			address.setRestaurant(restaurantRepository.findById(restaurantId).get());
+			address.setRestaurantDistrict(district);
+			address.setRestaurantState(state);
+			restaAddressrRepository.save(address);
+			restaurantRepository.findById(restaurantId).get().setRestaurantAddress(address);
+			return restaurantRepository.findById(restaurantId).get();
+
+		} else {
+			throw new CustomException("no restaurant found");
+		}
+		
 	}
 
 	

@@ -11,7 +11,7 @@ public interface RestaurantAddressService {
 
 	public Restaurant addAddress(RestaurantAddress address) throws CustomException;
 	public Restaurant  addRestaurantAddress( String houseNumber, String addressLane1, String addressLane2, String landmark,
-			int pincode, String district, String state, long userId) throws CustomException;
+			int pincode, String district, String state, int restaurantId) throws CustomException;
 
 	/*
 	 * *************************************************************************

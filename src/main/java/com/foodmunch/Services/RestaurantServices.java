@@ -19,6 +19,7 @@ public interface RestaurantServices {
 	public List<Restaurant> getAllRestaurants(); 	// read all restaurants
 	public Restaurant updateRestaurant(Restaurant restaurant); // update
 	public String deleteRestaurant(int restaurantId); // delete
+	public Restaurant restaurantAddAddress(Restaurant restaurant, RestaurantAddress restaurantAddress);
 
 	
 	

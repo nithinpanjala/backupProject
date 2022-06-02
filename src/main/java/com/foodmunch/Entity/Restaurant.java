@@ -32,8 +32,8 @@ public class Restaurant {
 	@Column(name = "restaurantName",unique = true, nullable = false)
 	private String restaurantName;
 
+	@JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "restaurantAddressId", referencedColumnName = "restaurantAddressId")
 	private RestaurantAddress restaurantAddress;
 	
 	@OneToMany(mappedBy = "restaurant")

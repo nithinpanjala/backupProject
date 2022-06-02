@@ -57,7 +57,11 @@ public class RestaurantServicesImpl implements RestaurantServices {
 	public Restaurant restaurantSignUp(Restaurant restaurant) {
 		return restaurantRepository.save(restaurant);
 	}
-
+	@Override
+	public Restaurant restaurantAddAddress(Restaurant restaurant, RestaurantAddress restaurantAddress) {
+			restaurant.setRestaurantAddress(restaurantAddress);
+			return	restaurantRepository.save(restaurant);
+	}
 
 
 	@Override

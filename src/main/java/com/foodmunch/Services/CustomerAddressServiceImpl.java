@@ -38,6 +38,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 			address.setCustPincode(pincode);
 			address.setCustDistrict(district);
 			address.setCustState(state);
+			address.setCustomer(userRepository.findById(userId).get());
 			addressRepository.save(address);
 			return userRepository.findById(userId).get();
 

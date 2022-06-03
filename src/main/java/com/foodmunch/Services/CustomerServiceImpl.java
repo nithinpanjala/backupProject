@@ -47,9 +47,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public Customer updateUserPassword(long userId, String userPassword, String newUserPassword) throws CustomException {
+	public Customer updateUserPassword(String userName, String userPassword, String newUserPassword) throws CustomException {
 
-		Customer user = userRepository.findById(userId).get();
+		Customer user = userRepository.findByCustomerNameAndCustomerPassword(userName , userPassword).get();
 		if (user == null) {
 			throw new CustomException("no user found");
 		} else {

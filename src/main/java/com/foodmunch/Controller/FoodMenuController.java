@@ -72,12 +72,12 @@ public class FoodMenuController {
 
 	@GetMapping(value = "/readDish/{Dishid}")
 	public ResponseEntity<FoodMenu> readDish(@RequestParam int Dishid) {
-		return new ResponseEntity<FoodMenu>(restaurantServices.readDish(Dishid), HttpStatus.FOUND);
+		return new ResponseEntity<FoodMenu>(restaurantServices.readDish(Dishid), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/getAllDishes")
 	public ResponseEntity<Set<FoodMenu>> getAllDishes(@RequestParam int restaurantId) {
-		return new ResponseEntity<Set<FoodMenu>>(restaurantServices.getAllDishes(restaurantId), HttpStatus.FOUND);
+		return new ResponseEntity<Set<FoodMenu>>(restaurantServices.getAllDishes(restaurantId), HttpStatus.OK);
 	}
 
 

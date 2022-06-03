@@ -29,7 +29,7 @@ public interface CustomerService {
 	 */
 
 	public Customer updateUser(Customer user) throws CustomException; // update
-	public Customer updateUserPassword(long userId, String userPassword, String newUserPassword) throws CustomException;// update
+	public Customer updateUserPassword(String userName, String userPassword, String newUserPassword) throws CustomException;// update
 	public Customer updateUsermobile(String userName, String userPassword, String newUsermobile) throws CustomException;
 	public Customer updateUserEmail(String userName, String userPassword, String newUserEmail) throws CustomException;
 

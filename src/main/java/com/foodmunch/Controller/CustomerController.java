@@ -112,21 +112,24 @@ public class CustomerController {
 
 	}
 	
-	@PutMapping(value = "/updateUserPassword")
-	public ResponseEntity<Customer> updateUserPassword(@Valid @RequestParam long userId,@Valid  @RequestParam String userPassword,
-			@Valid @RequestParam String newUserPassword) {
-		return new ResponseEntity<Customer>(customerService.updateUserPassword(userId, userPassword, newUserPassword), HttpStatus.ACCEPTED);
+	@PutMapping(value = "/updateUserPassword/{userName}/{userPassword}/{newUserPassword}")
+	public ResponseEntity<Customer> updateUserPassword(@Valid @PathVariable("userName") String userName,
+			@Valid @PathVariable("userPassword") String userPassword,
+			@Valid @PathVariable("newUserPassword")String newUserPassword) {
+		return new ResponseEntity<Customer>(customerService.updateUserPassword(userName, userPassword, newUserPassword), HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value = "/updateUsermobile")
-	public ResponseEntity<Customer> updateUsermobile(@Valid @RequestParam String userName,@Valid  @RequestParam String userPassword,
-			@Valid @RequestParam String newUsermobile) {
+	@PutMapping(value = "/updateUsermobile/{userName}/{userPassword}/{newUsermobile}")
+	public ResponseEntity<Customer> updateUsermobile(@Valid @PathVariable("userName") String userName,
+			@Valid @PathVariable("userPassword") String userPassword,
+			@Valid @PathVariable("newUsermobile") String newUsermobile) {
 		return new ResponseEntity<Customer>(customerService.updateUsermobile(userName, userPassword, newUsermobile), HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value = "/updateUserEmail")
-	public ResponseEntity<Customer> updateUserEmail(@Valid @RequestParam String userName,@Valid  @RequestParam String userPassword,
-			@Valid @RequestParam String newUserEmail) {
+	@PutMapping(value = "/updateUserEmail/{userName}/{userPassword}/{newUserEmail}")
+	public ResponseEntity<Customer> updateUserEmail(@Valid @PathVariable("userName") String userName,
+			@Valid @PathVariable("userPassword") String userPassword,
+			@Valid @PathVariable("newUserEmail") String newUserEmail) {
 		return new ResponseEntity<Customer>(customerService.updateUserEmail(userName, userPassword, newUserEmail), HttpStatus.ACCEPTED);
 	}
 	

@@ -74,6 +74,9 @@ public class RestaurantController {
 	/*
 	 *  Restaurant delete operations
 	 */
+	/*
+	 *  Restaurant delete operations
+	 */
 	@DeleteMapping(value = "/deleteRestaurant/{restaurantId}")
 	public ResponseEntity<String>  deleteRestaurant(@PathVariable("restaurantId") int restaurantId) {
 

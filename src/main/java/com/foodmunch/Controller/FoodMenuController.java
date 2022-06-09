@@ -53,7 +53,7 @@ public class FoodMenuController {
 
 	@DeleteMapping(value = "/deleteDish/{dishId}")
 	public ResponseEntity<String> deleteDish(@PathVariable int dishId) {
-		return new ResponseEntity<String>(restaurantServices.deleteDish(dishId), HttpStatus.FOUND);
+		return new ResponseEntity<String>(restaurantServices.deleteDish(dishId), HttpStatus.OK);
 	}
 
 	/* *************************************************************************

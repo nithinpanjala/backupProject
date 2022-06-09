@@ -1,6 +1,9 @@
 package com.foodmunch.Controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -17,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodmunch.Entity.Constants;
 import com.foodmunch.Entity.RestaurantAdmin;
 import com.foodmunch.Services.RestaurantAdminService;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
@@ -116,5 +123,28 @@ public class RestaurantAdminController {
 		return new ResponseEntity<RestaurantAdmin>(restaurantAdminService.updateUserEmail(userName, userPassword, newUserEmail), HttpStatus.ACCEPTED);
 	}
 	
+	
+
+	/*
+	 * *************************************************************************
+	 * authenticate operations
+	 * ***********************************************************************
+	 */
+	@PostMapping(value = "/authenticate")
+	public Map<String, String> generateToken(@RequestBody RestaurantAdmin restaurantAdmin){
+		long timestamp=System.currentTimeMillis();
+		String token=Jwts.builder().signWith(SignatureAlgorithm.HS256,Constants.API_SECRET_KEY)
+			.setIssuedAt(new Date(timestamp))
+			.setExpiration(new Date(timestamp+Constants.TOKEN_VALIDITY))
+			.claim("customerId", restaurantAdmin.getAdminId())
+			.claim("customerName", restaurantAdmin.getAdminName())
+			.claim("customerEmail", restaurantAdmin.getAdminEmail())
+			.compact();
+		Map<String, String> map= new HashMap<>();
+		
+		map.put("JWT", token);
+		return map;
+		
+	}
 	
 }

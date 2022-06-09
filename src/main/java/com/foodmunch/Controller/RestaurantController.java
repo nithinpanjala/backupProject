@@ -51,14 +51,14 @@ public class RestaurantController {
 
 	@GetMapping(value = "/getRestaurant/{restaurantId}")
 	public ResponseEntity<Restaurant > readRestaurant(@PathVariable("restaurantId") int restaurantId) {
-		return new ResponseEntity<Restaurant >(restaurantServices.readRestaurant(restaurantId), HttpStatus.FOUND);
+		return new ResponseEntity<Restaurant >(restaurantServices.readRestaurant(restaurantId), HttpStatus.OK);
 
 	}
 	
 	
 	@GetMapping(value = "/getAllRestaurant")
 	public ResponseEntity<List<Restaurant>> getAllRestaurant() {
-		return new ResponseEntity<List<Restaurant>>(restaurantServices.getAllRestaurants(), HttpStatus.OK);
+		return new ResponseEntity<List<Restaurant>>(restaurantServices.getAllRestaurants(), HttpStatus.ACCEPTED);
 	}
 	
 	/*

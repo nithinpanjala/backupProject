@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -40,13 +41,24 @@ public class Restaurant {
 	@JsonManagedReference(value = "foodMenu")
 	private Set<FoodMenu> foodMenu;
 	
-	@OneToMany(mappedBy = "restaurant")
-	@JsonManagedReference(value = "restaurantAdmin")
-	private Set<RestaurantAdmin> restaurantAdmin;
+    @OneToOne
+    @JoinColumn(name = "adminId", referencedColumnName = "adminId")
+    @JsonBackReference
+	private RestaurantAdmin restaurantAdmin;
 
 	public Restaurant() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Restaurant(int restaurantId, @NotEmpty(message = "Please provide a restaurant Name") String restaurantName,
+			RestaurantAddress restaurantAddress, Set<FoodMenu> foodMenu, RestaurantAdmin restaurantAdmin) {
+		super();
+		this.restaurantId = restaurantId;
+		this.restaurantName = restaurantName;
+		this.restaurantAddress = restaurantAddress;
+		this.foodMenu = foodMenu;
+		this.restaurantAdmin = restaurantAdmin;
 	}
 
 	public int getRestaurantId() {
@@ -81,31 +93,12 @@ public class Restaurant {
 		this.foodMenu = foodMenu;
 	}
 
-	public Set<RestaurantAdmin> getRestaurantAdmin() {
+	public RestaurantAdmin getRestaurantAdmin() {
 		return restaurantAdmin;
 	}
 
-	public void setRestaurantAdmin(Set<RestaurantAdmin> restaurantAdmin) {
+	public void setRestaurantAdmin(RestaurantAdmin restaurantAdmin) {
 		this.restaurantAdmin = restaurantAdmin;
 	}
 
-	public Restaurant(int restaurantId, @NotEmpty(message = "Please provide a restaurant Name") String restaurantName,
-			RestaurantAddress restaurantAddress, Set<FoodMenu> foodMenu, Set<RestaurantAdmin> restaurantAdmin) {
-		super();
-		this.restaurantId = restaurantId;
-		this.restaurantName = restaurantName;
-		this.restaurantAddress = restaurantAddress;
-		this.foodMenu = foodMenu;
-		this.restaurantAdmin = restaurantAdmin;
-	}
-
-	public Restaurant(int restaurantId, @NotEmpty(message = "Please provide a restaurant Name") String restaurantName,
-			RestaurantAddress restaurantAddress) {
-		super();
-		this.restaurantId = restaurantId;
-		this.restaurantName = restaurantName;
-		this.restaurantAddress = restaurantAddress;
-	}
-	
-	
 }

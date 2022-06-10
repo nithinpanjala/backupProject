@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodmunch.Entity.FoodMenu;
 import com.foodmunch.Services.RestaurantServices;
+
+import springfox.documentation.spring.web.json.Json;
 
 
 @CrossOrigin(origins="http://localhost:4200")
@@ -52,8 +57,10 @@ public class FoodMenuController {
 	 */
 
 	@DeleteMapping(value = "/deleteDish/{dishId}")
-	public ResponseEntity<String> deleteDish(@PathVariable int dishId) {
-		return new ResponseEntity<String>(restaurantServices.deleteDish(dishId), HttpStatus.OK);
+	public ResponseEntity<String> deleteDish(@PathVariable("dishId") int dishId) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String s = restaurantServices.deleteDish(dishId);
+		return new ResponseEntity<String>(mapper.writeValueAsString(s), HttpStatus.OK);
 	}
 
 	/* *************************************************************************
@@ -61,8 +68,8 @@ public class FoodMenuController {
 	 *	***********************************************************************
 	 */
 	@PutMapping(value = "/updateDishQuantity/{quantity}/{dishId}")
-	public ResponseEntity<FoodMenu> updateDishQuantity(@RequestParam  int quantity,@RequestParam int dishId) {
-		return new ResponseEntity<FoodMenu>(restaurantServices.updateDishQuantity(quantity, dishId), HttpStatus.ACCEPTED);
+	public ResponseEntity<FoodMenu> updateDishQuantity(@PathVariable("quantity")  int quantity,@PathVariable("dishId") int dishId) {
+		return new ResponseEntity<FoodMenu>(restaurantServices.updateDishQuantity(quantity, dishId), HttpStatus.OK);
 
 	}
 	/* *************************************************************************
@@ -70,7 +77,7 @@ public class FoodMenuController {
 	 *	***********************************************************************
 	 */
 
-	@GetMapping(value = "/readDish/{Dishid}")
+	@GetMapping(value = "/readDish")
 	public ResponseEntity<FoodMenu> readDish(@RequestParam int Dishid) {
 		return new ResponseEntity<FoodMenu>(restaurantServices.readDish(Dishid), HttpStatus.OK);
 	}

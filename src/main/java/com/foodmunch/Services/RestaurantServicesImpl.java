@@ -92,7 +92,8 @@ public class RestaurantServicesImpl implements RestaurantServices {
 	@Override
 	public String deleteDish(int dishId) {
 		dishRepository.delete(dishRepository.findById(dishId).get());
-		return " dishID" + dishId+ "deleted";
+		String s = "dishID " + dishId+ "deleted";
+		return s;
 	}
 
 

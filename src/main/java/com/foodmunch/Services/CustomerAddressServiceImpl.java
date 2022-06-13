@@ -26,8 +26,15 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 	private CustomerAddressRepository addressRepository;
 
 
-	public Customer  addCustomerAddress( String houseNumber, String addressLane1, String addressLane2, String landmark,
-			int pincode, String district, String state, long userId) throws CustomException{
+	public Customer  addCustomerAddress( 
+			String houseNumber,
+			String addressLane1,
+			String addressLane2,
+			String landmark,
+			int pincode, 
+			String district,
+			String state, 
+			long userId) throws CustomException{
 
 		if (userRepository.findById(userId).isPresent()) {
 			CustomerAddress address = new CustomerAddress();

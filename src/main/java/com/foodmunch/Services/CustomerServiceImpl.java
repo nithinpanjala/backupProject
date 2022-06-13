@@ -147,6 +147,13 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 
+
+	@Override
+	public Customer readUser(long userId) throws CustomException {
+		
+		return userRepository.getById(userId);
+	}
+
 	
 
 

@@ -8,7 +8,7 @@ import com.foodmunch.Entity.FoodMenu.FoodType;
 import com.foodmunch.Entity.Restaurant;
 
 public interface FoodMenuService {
-	public Set<FoodMenu> addDishes(FoodMenu dish);
+	public List<FoodMenu> addDishes(FoodMenu dish);
 
 	public FoodMenu UpdateDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
 			FoodType vegeterianType, Restaurant restaurant);

@@ -85,8 +85,8 @@ public class FoodMenu {
 		return isVegeterian;
 	}
 
-	public void setIsVegeterian(FoodType isVegeterian) {
-		this.isVegeterian = isVegeterian;
+	public void setIsVegeterian(FoodType foodType) {
+		this.isVegeterian = foodType;
 	}
 
 	public Restaurant getRestaurant() {

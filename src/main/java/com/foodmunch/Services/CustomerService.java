@@ -20,6 +20,7 @@ public interface CustomerService {
 	 * read operations
 	 * ***********************************************************************
 	 */
+	public Customer readUser(long userId) throws CustomException;
 	public Customer readUser(long userId, String userPassword) throws CustomException;
 	public Customer readUserByUserNameAndPassword(String userName, String userPassword) throws CustomException;
 	/*

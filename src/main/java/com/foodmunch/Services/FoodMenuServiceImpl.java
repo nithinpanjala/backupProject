@@ -23,9 +23,17 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	FoodMenuRepository dishRepository;
 
 	@Override
-	public Set<FoodMenu> addDishes(FoodMenu dish) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FoodMenu> addDishes(FoodMenu dish) {
+		if (dishRepository.existsById(dish.getFoodId())) {
+			throw new CustomException("dish already exists ");
+	
+		} else {
+			 dishRepository.save(dish);
+			 
+		}
+		
+
+		return   dishRepository.findAll();
 	}
 
 	@Override

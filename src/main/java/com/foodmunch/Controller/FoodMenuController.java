@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodmunch.Entity.FoodMenu;
+import com.foodmunch.Entity.MenuDAO;
+import com.foodmunch.Services.FoodMenuService;
 import com.foodmunch.Services.RestaurantServices;
 
 import springfox.documentation.spring.web.json.Json;
@@ -32,6 +34,8 @@ import springfox.documentation.spring.web.json.Json;
 public class FoodMenuController {
 	@Autowired
 	RestaurantServices restaurantServices;
+	@Autowired
+	FoodMenuService foodMenuService;
 	
 	/* *************************************************************************
 	 *  						Dish operations
@@ -44,10 +48,15 @@ public class FoodMenuController {
 	 *	***********************************************************************
 	 */
 	
-	@PostMapping(value = "/addDishes/{dish}")
-	public ResponseEntity<List<FoodMenu> > addDishes(@RequestBody FoodMenu dish ) {
-
-		return new ResponseEntity<List<FoodMenu> >(restaurantServices.addDishes(dish), HttpStatus.OK);
+	@PostMapping(value = "/addDishes")
+	public ResponseEntity<List<FoodMenu> > addDishes(@RequestBody MenuDAO dish ) {
+	FoodMenu foodMenu = new FoodMenu();
+	foodMenu.setFoodName(dish.getFoodName());
+	foodMenu.setFoodPrice(dish.getFoodPrice());
+	foodMenu.setFoodQuantityAvailable(dish.getFoodQuantityAvailable());
+	foodMenu.setIsVegeterian(dish.getIsVegeterian());
+	foodMenu.setRestaurant(restaurantServices.readRestaurant(dish.getRestaurantId()));
+	return new ResponseEntity<List<FoodMenu> >(foodMenuService.addDishes(foodMenu), HttpStatus.OK);
 
 	}
 	

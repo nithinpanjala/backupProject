@@ -15,17 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodmunch.Entity.FoodMenu;
-import com.foodmunch.Entity.MenuDAO;
 import com.foodmunch.Services.FoodMenuService;
 import com.foodmunch.Services.RestaurantServices;
-
-import springfox.documentation.spring.web.json.Json;
 
 
 @CrossOrigin(origins="http://localhost:4200")
@@ -49,16 +44,11 @@ public class FoodMenuController {
 	 */
 	
 	@PostMapping(value = "/addDishes")
-	public ResponseEntity<List<FoodMenu> > addDishes(@RequestBody MenuDAO dish ) {
-	FoodMenu foodMenu = new FoodMenu();
-	foodMenu.setFoodName(dish.getFoodName());
-	foodMenu.setFoodPrice(dish.getFoodPrice());
-	foodMenu.setFoodQuantityAvailable(dish.getFoodQuantityAvailable());
-	foodMenu.setIsVegeterian(dish.getIsVegeterian());
-	foodMenu.setRestaurant(restaurantServices.readRestaurant(dish.getRestaurantId()));
-	return new ResponseEntity<List<FoodMenu> >(foodMenuService.addDishes(foodMenu), HttpStatus.OK);
+	public ResponseEntity<List<FoodMenu> > addDishes(@RequestBody FoodMenu dish ) {
+	return new ResponseEntity<List<FoodMenu> >(foodMenuService.addDishes(dish), HttpStatus.OK);
 
 	}
+	
 	
 	/* *************************************************************************
 	 *  						delete operations

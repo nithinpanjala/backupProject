@@ -1,5 +1,6 @@
 package com.foodmunch.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class FoodMenu {
 	    VEG, NONVEG  
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE )
 	@JoinColumn(name = "restaurantId")
 	@JsonBackReference(value = "foodMenu")
 	private Restaurant restaurant;

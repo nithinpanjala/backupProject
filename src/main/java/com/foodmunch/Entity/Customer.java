@@ -55,7 +55,7 @@ public class Customer {
 	private String customerEmail;
 
 	@JsonManagedReference(value = "customerAddress")
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.MERGE)
 	private Set<CustomerAddress> customerAddresses;
 	
 	public Customer() {

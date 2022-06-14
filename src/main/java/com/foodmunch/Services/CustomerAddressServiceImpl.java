@@ -59,9 +59,9 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
 	
 	
 	@Override
-	public Customer addAddress(CustomerAddress address)  throws CustomException {
-		addressRepository.save(address);
-		return address.getCustomer();
+	public CustomerAddress addAddress(CustomerAddress address)  throws CustomException {
+		return addressRepository.save(address);
+		 
 	}
 	
 	

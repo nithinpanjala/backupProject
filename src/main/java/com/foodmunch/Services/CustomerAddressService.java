@@ -15,7 +15,7 @@ public interface CustomerAddressService {
 	 * ***********************************************************************
 	 */
 	
-	public Customer addAddress(CustomerAddress address) throws CustomException;
+	public CustomerAddress addAddress(CustomerAddress address) throws CustomException;
 	public Customer  addCustomerAddress( String houseNumber, String addressLane1, String addressLane2, String landmark,
 			int pincode, String district, String state, long userId) throws CustomException;
 

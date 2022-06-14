@@ -1,5 +1,6 @@
 package com.foodmunch.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class OrderItems {
 	private int orderFoodId;
 	private int quantity;
 	
-		@ManyToOne
+		@ManyToOne(cascade = CascadeType.ALL)
 		@JsonBackReference(value = "orderTable")
 		@JoinColumn(name = "cartNo",referencedColumnName = "cartNo" )
 		private Cart cart;

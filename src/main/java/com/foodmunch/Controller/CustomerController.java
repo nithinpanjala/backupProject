@@ -66,6 +66,12 @@ public class CustomerController {
 	 * ***********************************************************************
 	 */
 
+	@GetMapping(value = "/getUserById/{userId}")
+	public ResponseEntity<Customer> getUserById(@Valid @PathVariable("userId") long userId) {
+		return new ResponseEntity<Customer>(customerService.readUserById(userId), HttpStatus.OK);
+	}
+	
+	
 	@GetMapping(value = "/getUser/{userId}/{userPassword}")
 	public ResponseEntity<Customer> readUser(@Valid @PathVariable("userId") long userId,
 			@PathVariable("userPassword") String userPassword) {

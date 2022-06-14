@@ -1,5 +1,6 @@
 package com.foodmunch.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,12 +47,12 @@ public class CustomerAddress {
 	@Column(name = "custstate", nullable = false)
 	private String custState;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "customerId",referencedColumnName = "customerId" )
 	@JsonBackReference(value = "customerAddress")
 	private Customer customer;
 	
-	   @OneToOne(mappedBy = "deliveryAddress")
+	   @OneToOne(mappedBy = "deliveryAddress",cascade = CascadeType.ALL)
 		private Cart cart;
 
 	public CustomerAddress(int custAddressId, String custHouseNumber, String custAddressLane1, String custAddressLane2,

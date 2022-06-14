@@ -37,7 +37,7 @@ public class Restaurant {
     @OneToOne(cascade = CascadeType.ALL)
 	private RestaurantAddress restaurantAddress;
 	
-	@OneToMany(mappedBy = "restaurant")
+	@OneToMany(mappedBy = "restaurant" ,cascade = CascadeType.ALL)
 	@JsonManagedReference(value = "foodMenu")
 	private Set<FoodMenu> foodMenu;
 	

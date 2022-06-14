@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodmunch.Entity.CusAddDAO;
-import com.foodmunch.Entity.Customer;
 import com.foodmunch.Entity.CustomerAddress;
 import com.foodmunch.Services.CustomerAddressService;
 import com.foodmunch.Services.CustomerService;
@@ -38,40 +36,22 @@ public class AddressController {
 	CustomerService customerService;
 	
 	@PostMapping(value = "/addAddress")
-	public ResponseEntity<Customer> addAddress(@Valid @RequestBody CusAddDAO address) {
-		System.out.println(address.getCustAddressLane1()+address.getCustAddressLane2()+
-				address.getCustLandmark()+address.getCustPincode()+
-				address.getCustDistrict()+address.getCustState()+
-				customerService.readUser(address.getCustomerId()));
-		CustomerAddress customerAddress = new CustomerAddress(0,address.getCustHouseNumber(), 
-				address.getCustAddressLane1(),address.getCustAddressLane2(),
-				address.getCustLandmark(),address.getCustPincode(),
-				address.getCustDistrict(),address.getCustState(),
-				customerService.readUser(address.getCustomerId())
-				);
-		return new ResponseEntity<Customer>(addressService.addAddress(customerAddress), HttpStatus.ACCEPTED);
+	public ResponseEntity<CustomerAddress> addAddress(@Valid @RequestBody CustomerAddress address) {
+		/*
+		 * System.out.println(address.getCustAddressLane1()+address.getCustAddressLane2(
+		 * )+ address.getCustLandmark()+address.getCustPincode()+
+		 * address.getCustDistrict()+address.getCustState()+
+		 * customerService.readUserById(address.getCustomerId())); CustomerAddress
+		 * customerAddress = new CustomerAddress(0,address.getCustHouseNumber(),
+		 * address.getCustAddressLane1(),address.getCustAddressLane2(),
+		 * address.getCustLandmark(),address.getCustPincode(),
+		 * address.getCustDistrict(),address.getCustState(),
+		 * customerService.readUserById(address.getCustomerId()) );
+		 */
+		return new ResponseEntity<CustomerAddress>(addressService.addAddress(address), HttpStatus.ACCEPTED);
 
 	}
-	@PostMapping(value = "/addUserAddress")
-	public ResponseEntity<Customer> addUserAddress(@Valid @RequestBody CusAddDAO address){
-		System.out.println("*********");
-		System.out.println("*********");
-		System.out.println(address.getCustLandmark());
-		System.out.println("*********");
-		System.out.println("*********");
-		
-		return new ResponseEntity<Customer>(addressService.addCustomerAddress( 
-				address.getCustHouseNumber(), 
-				address.getCustAddressLane1(), 
-				address.getCustAddressLane2(),
-				address.getCustLandmark(),
-				address.getCustPincode(),
-				address.getCustDistrict(),
-				address.getCustState(),
-				address.getCustomerId()), HttpStatus.ACCEPTED);
 
-	}
-	
 	
 	@GetMapping(value = "/getSelectedAddress/{addressId}")
 	public ResponseEntity<CustomerAddress> getSelectedAddress(@PathVariable("addressId") int addressId) {

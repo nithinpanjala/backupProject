@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -27,32 +29,47 @@ public class Cart {
 	@Column(name = "totalPrice")
 	private float totalPrice;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference(value = "addressCartConnection")
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "custAddressId", referencedColumnName = "custAddressId")
 	private CustomerAddress deliveryAddress;
 	
+	
+	
 	@JsonManagedReference(value = "orderTable")
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE )
 	private Set<OrderItems> orderItems;
+	
+	@ManyToOne
+	@JsonBackReference(value = "cartConnection")
+	@JoinColumn(name = "customerId",referencedColumnName = "customerId" )
+	private Customer customer;
 
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Cart(int cartNo, float totalPrice, CustomerAddress deliveryAddress, Set<OrderItems> orderItems) {
+	public Cart(int cartNo,
+			Customer customer) {
+		super();
+		this.cartNo = cartNo;
+		this.customer = customer;
+	}
+	public Cart(int cartNo, CustomerAddress deliveryAddress,
+			Customer customer) {
+		super();
+		this.cartNo = cartNo;
+		this.deliveryAddress = deliveryAddress;
+		this.customer = customer;
+	}
+	public Cart(int cartNo, float totalPrice, CustomerAddress deliveryAddress, Set<OrderItems> orderItems,
+			Customer customer) {
 		super();
 		this.cartNo = cartNo;
 		this.totalPrice = totalPrice;
 		this.deliveryAddress = deliveryAddress;
 		this.orderItems = orderItems;
-	}
-
-	public Cart(int cartNo, float totalPrice, CustomerAddress deliveryAddress) {
-		super();
-		this.cartNo = cartNo;
-		this.totalPrice = totalPrice;
-		this.deliveryAddress = deliveryAddress;
+		this.customer = customer;
 	}
 
 	public int getCartNo() {
@@ -87,6 +104,13 @@ public class Cart {
 		this.orderItems = orderItems;
 	}
 
-	
+	public Customer getCustomer() {
+		return customer;
+	}
 
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	
 }

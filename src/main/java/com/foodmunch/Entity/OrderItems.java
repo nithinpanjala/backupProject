@@ -17,12 +17,14 @@ public class OrderItems {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int OrderItemsId;
+	
+	
 	private long OrderCustId;
 	private int orderRestId;
 	private int orderFoodId;
 	private int quantity;
 	
-		@ManyToOne(cascade = CascadeType.ALL)
+		@ManyToOne
 		@JsonBackReference(value = "orderTable")
 		@JoinColumn(name = "cartNo",referencedColumnName = "cartNo" )
 		private Cart cart;

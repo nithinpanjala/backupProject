@@ -52,7 +52,8 @@ public class CustomerAddress {
 	@JsonBackReference(value = "customerAddress")
 	private Customer customer;
 	
-	   @OneToOne(mappedBy = "deliveryAddress",cascade = CascadeType.ALL)
+	@JsonBackReference(value = "addressCartConnection")
+	   @OneToOne(mappedBy = "deliveryAddress" )
 		private Cart cart;
 
 	public CustomerAddress(int custAddressId, String custHouseNumber, String custAddressLane1, String custAddressLane2,

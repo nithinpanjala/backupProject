@@ -45,8 +45,8 @@ public class CartController {
 
 	}
 	
-	@GetMapping(value = "/readCart")
-	public  ResponseEntity<Cart>   readCart(@RequestParam  int cartNo){
+	@GetMapping(value = "/readCart/{cartNo}")
+	public  ResponseEntity<Cart>   readCart(@PathVariable("cartNo")  int cartNo){
 		return new ResponseEntity<Cart>(cartService.readCart(cartNo), HttpStatus.ACCEPTED);
 	
 	}

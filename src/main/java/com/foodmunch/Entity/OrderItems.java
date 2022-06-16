@@ -14,17 +14,17 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "OrderItems")
 public class OrderItems {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int OrderItemsId;
+	private int orderItemsId;
 	
-	
-	private long OrderCustId;
+	private int orderCustId;
 	private int orderRestId;
 	private int orderFoodId;
 	private int quantity;
 	
-		@ManyToOne
+		@ManyToOne( cascade = CascadeType.ALL )
 		@JsonBackReference(value = "orderTable")
 		@JoinColumn(name = "cartNo",referencedColumnName = "cartNo" )
 		private Cart cart;
@@ -34,40 +34,40 @@ public class OrderItems {
 			// TODO Auto-generated constructor stub
 		}
 
-		public OrderItems(int orderItemsId, long orderCustId, int orderRestId, int orderFoodId, int quantity,
+		public OrderItems(int orderItemsId, int orderCustId, int orderRestId, int orderFoodId, int quantity,
 				Cart cart) {
 			super();
-			OrderItemsId = orderItemsId;
-			OrderCustId = orderCustId;
+			this.orderItemsId = orderItemsId;
+			this.orderCustId = orderCustId;
 			this.orderRestId = orderRestId;
 			this.orderFoodId = orderFoodId;
 			this.quantity = quantity;
 			this.cart = cart;
 		}
 
-		public OrderItems(int orderItemsId, long orderCustId, int orderRestId, int orderFoodId, int quantity) {
+		public OrderItems(int orderItemsId, int orderCustId, int orderRestId, int orderFoodId, int quantity) {
 			super();
-			OrderItemsId = orderItemsId;
-			OrderCustId = orderCustId;
+			this.orderItemsId = orderItemsId;
+			this.orderCustId = orderCustId;
 			this.orderRestId = orderRestId;
 			this.orderFoodId = orderFoodId;
 			this.quantity = quantity;
 		}
 
 		public int getOrderItemsId() {
-			return OrderItemsId;
+			return orderItemsId;
 		}
 
 		public void setOrderItemsId(int orderItemsId) {
-			OrderItemsId = orderItemsId;
+			this.orderItemsId = orderItemsId;
 		}
 
-		public long getOrderCustId() {
-			return OrderCustId;
+		public int getOrderCustId() {
+			return orderCustId;
 		}
 
-		public void setOrderCustId(long orderCustId) {
-			OrderCustId = orderCustId;
+		public void setOrderCustId(int orderCustId) {
+			this.orderCustId = orderCustId;
 		}
 
 		public int getOrderRestId() {
@@ -101,8 +101,5 @@ public class OrderItems {
 		public void setCart(Cart cart) {
 			this.cart = cart;
 		}
-	
-	
-	
-	
+
 }

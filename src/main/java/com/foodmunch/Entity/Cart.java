@@ -37,7 +37,7 @@ public class Cart {
 	
 	
 	@JsonManagedReference(value = "orderTable")
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE )
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL )
 	private Set<OrderItems> orderItems;
 	
 	@ManyToOne

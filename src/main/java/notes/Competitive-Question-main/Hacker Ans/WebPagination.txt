@@ -1,0 +1,65 @@
+class Result {
+
+	public static List<String> fetchItemsToDisplay(List<List<String>> items,
+			int sortParameter, int sortOrder, int itemsPerPage, int pageNumber) {
+		// Write your code here
+		List<Item> itemsList = new ArrayList<>();
+		//stream api for streaming the items to add to itemslist
+		items.stream().forEach(p ->itemsList.add(new
+				Item(p.get(sortParameter))));
+		Collections.sort(itemsList,sortOrder == 0 ? new ItemsAscComparator() :
+			new ItemsDescComparator());
+		List<String> finalList = new ArrayList<>();
+		List<String> returnList = new ArrayList<>();
+		//loop through items and add to finallist
+		for(int i = itemsPerPage * pageNumber;
+				i<Math.min((itemsPerPage*pageNumber)+itemsPerPage,items.size()); i++) {
+			finalList.add(itemsList.get(i).getItemValue());
+
+		}
+		for(String var : finalList) {
+			items.stream().forEach(p -> {
+				if(p.get(sortParameter).equals(var)) {
+					returnList.add(p.get(0));
+				}
+			});
+		}
+		return returnList;
+	}
+	//Static comparator class to compare items values in ascending order
+	static class ItemsAscComparator implements Comparator<Item> {
+		public int compare(Item i1, Item i2) {
+
+			if(org.apache.commons.lang3.StringUtils.isNumeric(i1.getItemValue())) {
+				return Integer.parseInt(i1.getItemValue())-
+						Integer.parseInt(i2.getItemValue());
+			}
+			return i1.getItemValue().compareTo(i2.getItemValue());
+		}
+	}
+	//Static comparator class to compare items values in descending order
+	static class ItemsDescComparator implements Comparator<Item> {
+		public int compare(Item i1, Item i2) {
+
+			if(org.apache.commons.lang3.StringUtils.isNumeric(i2.getItemValue())) {
+				return Integer.parseInt(i2.getItemValue()) -
+						Integer.parseInt(i1.getItemValue());
+			}
+			return i2.getItemValue().compareTo(i1.getItemValue());
+		}
+	}
+	//static Item Class
+
+	static class Item {
+		private String value;
+
+		//parameterized constructor
+		public Item(String value) {
+			this.value=value;
+		}
+		//accessor method to get the value
+		public String getItemValue() {
+			return value;
+		}
+	}
+}

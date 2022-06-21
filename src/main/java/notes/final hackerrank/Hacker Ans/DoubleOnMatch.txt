@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class DoubleOnMatch {
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader data = new BufferedReader(new InputStreamReader(System.in));
+		int length = Integer.parseInt(data.readLine());
+		int arr[] = new int[length] ;
+		for(int init=0;init<length;init++) {
+			arr[init] = Integer.parseInt(data.readLine());
+		}
+		Arrays.sort(arr);
+		int num = Integer.parseInt(data.readLine());
+		for(int index=0;index<arr.length;index++) {
+			if(arr[index] == num) {
+				num = num*2;
+			}
+		}
+		System.out.println(num);
+		
+	}
+
+}

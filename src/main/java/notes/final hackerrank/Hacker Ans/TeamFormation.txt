@@ -1,0 +1,40 @@
+public class TeamFormation {
+
+public static void main(String[] args) {
+int[] skills = {12, 4, 6, 13, 5, 10};
+int minPlayers = 3;
+int minLevel = 4;
+int maxLevel = 5;
+        int count = countTeam(skills , minPlayers , minLevel , maxLevel);
+        System.out.println(count);
+}
+
+private static int countTeam(int[] skills, int minPlayers, int minLevel, int maxLevel) {
+if(skills.length != 0) {
+int[] filter = Arrays.stream(skills).filter(i -> (i>= minLevel && i<= maxLevel)).toArray();
+if(filter.length > minPlayers) {
+int count = 1;
+                for(int i = minPlayers ; i < filter.length ; i++) {
+                count += factorial(filter.length)/((factorial(i) * factorial(filter.length - i)));
+                }
+return count;
+} else {
+return (filter.length == minPlayers ? 1 : 0);
+}
+ 
+} else {
+return 0;
+}
+ 
+}
+ 
+  static int factorial(int n)
+  {
+  
+    return (n == 1 || n == 0) ? 1 : n * factorial(n - 1);
+  
+  }
+ 
+ 
+
+}

@@ -1,0 +1,54 @@
+ public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scanner=new Scanner(System.in);
+        int num_movies=scanner.nextInt();
+        
+        int[] ratingArray=new int[num_movies];
+        for (int i = 0; i < ratingArray.length; i++) {
+            ratingArray[i]=scanner.nextInt();
+        }
+        
+        int max_sum=0;
+        for (int i = 0; i < ratingArray.length; i++) {
+            int sub_sum=ratingArray[i];
+            for (int j = i+1; j < ratingArray.length; j++) {
+                sub_sum+=ratingArray[j];
+                if(sub_sum>max_sum) {
+                    max_sum=sub_sum;
+                }
+                if(sub_sum < 0){
+                    sub_sum = 0;
+                }
+            }
+
+        }
+        
+	System.out.println(max_sum);
+
+
+//----------------if required only-------------
+//   	if(max_sum <= 0){			
+//           System.out.println("Invalid Input");
+//       }else{
+//           System.out.println(max_sum);
+//       }
+                                
+                                
+ }
+
+OR
+
+public static long maximumSum(List<Integer> arr) {
+	int size = arr.size();
+	long max_so_far = Integer.MIN_VALUE, max_ending_here=0;
+	for(int i=0; i< size; i++){
+		max_ending_here = max_ending_here + arr.get(i);
+		if(max_so_far < max_ending_here){
+			max_so_far = max_ending_here;
+		}
+		if(max_ending_here < 0){
+			max_ending_here = 0;
+		}
+	}
+	return max_so_far;
+}

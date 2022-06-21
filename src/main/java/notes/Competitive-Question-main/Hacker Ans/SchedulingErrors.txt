@@ -1,0 +1,2 @@
+SELECT distinct p.name , c.name FROM PROFESSOR as p , COURSE as c , SHEDULE as s
+WHERE s.professor_id = p.id AND s.course_id = c.id AND p.department_id <> c.department_id ;

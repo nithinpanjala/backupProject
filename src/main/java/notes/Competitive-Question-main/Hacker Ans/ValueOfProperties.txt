@@ -1,0 +1,4 @@
+select s.br, s.pr from (select j.b as br, sum(j.p) as pr from (select
+	house.buyer_id as b, price.price as p from house inner join price on
+	house.house_id = price.house_id) as j group by j.b having count(j.b) > 1) as
+	s where s.pr>100 ;

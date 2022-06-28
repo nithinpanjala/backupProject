@@ -1,3 +1,0 @@
-public static int jumps(int flagHeight, int bigJump) {
-		return (flagHeight / bigJump) + (flagHeight % bigJump);
-		}

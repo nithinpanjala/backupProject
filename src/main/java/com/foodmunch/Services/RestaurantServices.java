@@ -38,5 +38,6 @@ public interface RestaurantServices {
 	public FoodMenu readDish(int Dishid);
 	
 	public Set<FoodMenu> getAllDishes(int restaurantId);
-
+	public Set<FoodMenu> getOnlyVeg(int restaurantId);
+	public Set<FoodMenu> getOnlyNonVeg(int restaurantId);
 }

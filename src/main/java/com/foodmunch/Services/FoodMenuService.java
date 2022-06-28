@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.foodmunch.Entity.FoodMenu;
 import com.foodmunch.Entity.FoodMenu.FoodType;
+import com.foodmunch.Exceptions.CustomException;
 import com.foodmunch.Entity.Restaurant;
 
 public interface FoodMenuService {
@@ -23,5 +24,6 @@ public interface FoodMenuService {
 	public FoodMenu readDish(int DishId);
 
 	public List<FoodMenu> readAllDishes();
+	public float getDishPrice(int itemId);
 
 }

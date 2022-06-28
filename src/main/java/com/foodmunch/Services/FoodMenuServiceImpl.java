@@ -113,6 +113,13 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 			return dishRepository.findAll();
 		}
 	}
+	public float getDishPrice(int itemId) throws CustomException {
+		if (dishRepository.existsById(itemId)) {
+			return dishRepository.getById(itemId).getFoodPrice();
 	
+		} else {
+			throw new CustomException("dish does not exists " +itemId);
+	}
+	}
 
 }

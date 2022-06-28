@@ -85,6 +85,16 @@ public class FoodMenuController {
 	public ResponseEntity<Set<FoodMenu>> getAllDishes(@RequestParam int restaurantId) {
 		return new ResponseEntity<Set<FoodMenu>>(restaurantServices.getAllDishes(restaurantId), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getVeg")
+	public ResponseEntity<Set<FoodMenu>> getVeg(@RequestParam int restaurantId){
+		return new ResponseEntity<Set<FoodMenu>> (restaurantServices.getOnlyVeg(restaurantId), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getNonVeg")
+	public ResponseEntity<Set<FoodMenu>> getNonVeg(@RequestParam int restaurantId){
+		return new ResponseEntity<Set<FoodMenu>> (restaurantServices.getOnlyNonVeg(restaurantId), HttpStatus.OK);
+	}
 
 
 }

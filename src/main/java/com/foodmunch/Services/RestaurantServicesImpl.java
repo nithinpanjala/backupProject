@@ -2,6 +2,7 @@ package com.foodmunch.Services;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,5 +118,24 @@ public class RestaurantServicesImpl implements RestaurantServices {
 	public Set<FoodMenu> getAllDishes(int restaurantId){
 		Restaurant restaurant =  restaurantRepository.findById(restaurantId).get();
 		return restaurant.getFoodMenu();
+	}
+
+
+	@Override
+	public Set<FoodMenu> getOnlyVeg(int restaurantId) {
+		Set<FoodMenu> set = restaurantRepository.findById(restaurantId).get().getFoodMenu();
+		Set<FoodMenu> onlyVeg = set.stream().filter( x -> 
+			 x.getIsVegeterian().name().contentEquals("VEG")
+		).collect(Collectors.toSet());
+		return onlyVeg;
+	}
+	
+	@Override
+	public Set<FoodMenu> getOnlyNonVeg(int restaurantId) {
+		Set<FoodMenu> set = restaurantRepository.findById(restaurantId).get().getFoodMenu();
+		Set<FoodMenu> 	onlyNonVeg = set.stream().filter( x -> 
+			 x.getIsVegeterian().name().contentEquals("NONVEG")
+		).collect(Collectors.toSet());
+		return onlyNonVeg;
 	}
 }

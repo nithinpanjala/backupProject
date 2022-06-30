@@ -106,7 +106,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return userRepository.findByCustomerNameAndCustomerPassword(userName , userPassword).get();
 
 		} else {
-			throw new CustomException("no user found");
+			throw new CustomException("Invalid User Credentials ");
 		}
 	}
 

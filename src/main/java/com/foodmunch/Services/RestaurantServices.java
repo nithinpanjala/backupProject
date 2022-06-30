@@ -25,7 +25,8 @@ public interface RestaurantServices {
 	
 	//Dishes 
 	public List<FoodMenu> addDishes(FoodMenu dish) ;
-
+	public FoodMenu updateDish(FoodMenu dish) ;
+	public FoodMenu updateDishQuantityAndPrice(int quantity,float price , int dishId);
 	public FoodMenu UpdateDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
 			FoodType vegeterianType, int restaurantId);
 

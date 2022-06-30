@@ -107,6 +107,16 @@ public class RestaurantServicesImpl implements RestaurantServices {
 		return dish;
 	}
 
+	@Override
+	public FoodMenu updateDishQuantityAndPrice(int quantity,float price , int dishId) {
+		FoodMenu dish = dishRepository.findById(dishId).get();
+		dish.setFoodQuantityAvailable(quantity);
+		dish.setFoodPrice(price);
+		dishRepository.save(dish);
+		return dish;
+	}
+
+
 
 
 	@Override
@@ -137,5 +147,11 @@ public class RestaurantServicesImpl implements RestaurantServices {
 			 x.getIsVegeterian().name().contentEquals("NONVEG")
 		).collect(Collectors.toSet());
 		return onlyNonVeg;
+	}
+
+
+	@Override
+	public FoodMenu updateDish(FoodMenu dish) {
+		return dishRepository.save(dish);
 	}
 }

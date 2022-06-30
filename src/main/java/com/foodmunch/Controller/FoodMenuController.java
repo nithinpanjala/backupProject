@@ -71,6 +71,17 @@ public class FoodMenuController {
 		return new ResponseEntity<FoodMenu>(restaurantServices.updateDishQuantity(quantity, dishId), HttpStatus.OK);
 
 	}
+	@PutMapping(value = "/updateDish")
+	public ResponseEntity<FoodMenu> updateDish(@RequestBody FoodMenu dish) {
+		return new ResponseEntity<FoodMenu>(restaurantServices.updateDish(dish), HttpStatus.OK);
+
+	}
+	@PutMapping(value = "/updateDishQuantityAndPrice/{quantity}/{price}/{dishId}")
+	public ResponseEntity<FoodMenu> updateDishQuantityAndPrice(@PathVariable("quantity")  int quantity,@PathVariable("price") float price, @PathVariable("dishId") int dishId) {
+		return new ResponseEntity<FoodMenu>(restaurantServices.updateDishQuantityAndPrice(quantity,price, dishId), HttpStatus.OK);
+
+	}
+	
 	/* *************************************************************************
 	 *  						Read operations
 	 *	***********************************************************************

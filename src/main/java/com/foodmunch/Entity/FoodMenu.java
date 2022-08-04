@@ -33,7 +33,9 @@ public class FoodMenu {
 	@Column(name = "foodQuantityAvailable", nullable = false)
 	private int foodQuantityAvailable;
 	
-
+	@Column(name = "imageurl" ,length = 1999999999 )
+	private byte[] imageurl;
+	
 	@Column(name = "isVegeterian")
 	private FoodType isVegeterian;
 	public enum FoodType {
@@ -56,6 +58,14 @@ public class FoodMenu {
 
 	public void setFoodId(int foodId) {
 		this.foodId = foodId;
+	}
+
+	public byte[] getImageurl() {
+		return imageurl;
+	}
+
+	public void setImageurl(byte[] imageurl) {
+		this.imageurl = imageurl;
 	}
 
 	public String getFoodName() {
@@ -115,6 +125,18 @@ public class FoodMenu {
 		this.foodName = foodName;
 		this.foodPrice = foodPrice;
 		this.foodQuantityAvailable = foodQuantityAvailable;
+		this.isVegeterian = isVegeterian;
+		this.restaurant = restaurant;
+	}
+
+	public FoodMenu(int foodId, String foodName, float foodPrice, int foodQuantityAvailable, byte[] imageurl,
+			FoodType isVegeterian, Restaurant restaurant) {
+		super();
+		this.foodId = foodId;
+		this.foodName = foodName;
+		this.foodPrice = foodPrice;
+		this.foodQuantityAvailable = foodQuantityAvailable;
+		this.imageurl = imageurl;
 		this.isVegeterian = isVegeterian;
 		this.restaurant = restaurant;
 	}

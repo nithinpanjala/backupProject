@@ -23,17 +23,15 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	FoodMenuRepository dishRepository;
 
 	@Override
-	public List<FoodMenu> addDishes(FoodMenu dish) {
+	public FoodMenu addDishes(FoodMenu dish) {
 		if (dishRepository.existsById(dish.getFoodId())) {
 			throw new CustomException("dish already exists ");
 	
 		} else {
-			 dishRepository.save(dish);
+			return   dishRepository.save(dish);
 			 
 		}
-		
 
-		return   dishRepository.findAll();
 	}
 	
 	
@@ -119,6 +117,21 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	
 		} else {
 			throw new CustomException("dish does not exists " +itemId);
+	}
+	}
+
+
+
+
+	@Override
+	public FoodMenu uploadImage(int dishId, byte[] Imageurl) {
+		if (dishRepository.existsById(dishId)) {
+			FoodMenu f = dishRepository.findById(dishId).get();
+			f.setImageurl(Imageurl);
+			return dishRepository.save(f);
+			
+		} else {
+			throw new CustomException("dish does not exists " +dishId);
 	}
 	}
 

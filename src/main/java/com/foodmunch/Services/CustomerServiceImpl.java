@@ -101,6 +101,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	@Override
 	public Customer readUserByUserNameAndPassword(String userName, String userPassword) throws CustomException{
+		Customer user = userRepository.findByCustomerNameAndCustomerPassword(userName , userPassword).get();
+		System.out.println(user.getCustomerFirstName());
+		System.out.println(user.getCustomerFirstName());
 		if (userRepository.findByCustomerNameAndCustomerPassword(userName , userPassword).isPresent()) {
 
 			return userRepository.findByCustomerNameAndCustomerPassword(userName , userPassword).get();

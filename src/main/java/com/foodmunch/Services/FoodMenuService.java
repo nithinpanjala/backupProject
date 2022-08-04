@@ -9,11 +9,13 @@ import com.foodmunch.Exceptions.CustomException;
 import com.foodmunch.Entity.Restaurant;
 
 public interface FoodMenuService {
-	public List<FoodMenu> addDishes(FoodMenu dish);
+	public FoodMenu addDishes(FoodMenu dish);
 
 	public FoodMenu UpdateDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
 			FoodType vegeterianType, Restaurant restaurant);
 
+	public FoodMenu uploadImage(int dishId,byte[] Imageurl);
+	
 	public FoodMenu createDish(int dishId, String dishName, float dishPrice, int dishQuantityAvailable,
 			FoodType vegeterianType, Restaurant restaurant);
 
